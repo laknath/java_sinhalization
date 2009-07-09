@@ -51,14 +51,14 @@ public class SinhalaContextExampleApp extends SingleFrameApplication {
 	}
         
         Date now = new Date();        
-        // Display using the Antarctica locale format
-        DateFormat antarcticaFormat =
+        // Display using the Sri Lanka locale format
+        DateFormat sinhala =
                 DateFormat.getDateTimeInstance(
                 DateFormat.FULL, DateFormat.FULL,
-                new Locale("sl", "SI"));
+                new Locale("si", "LK"));
 
-        String antarcticaString = antarcticaFormat.format(now);
-        System.out.println("Antarctica: " + antarcticaString);
+        String sinhalaTime = sinhala.format(now);
+        System.out.println("Sri Lanka: " + sinhalaTime);
 
     }
 }
