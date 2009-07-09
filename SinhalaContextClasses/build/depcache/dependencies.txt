@@ -11,7 +11,7 @@ net.locale.sinhala.Sinhala
 net.locale.LocaleNumberFormatProvider
 net.locale.sinhala.NumberFormatProvider_si_LK
 ||:net.locale.sinhala.CurrencyNameProvider_si_LK
-net.locale.LocaleCollatorProvider
+net.locale.LocaleCurrencyNameProvider
 net.locale.sinhala.CurrencyNameProvider_si_LK
 net.locale.sinhala.Sinhala
 ||:net.locale.LocaleCollatorProvider
@@ -42,8 +42,8 @@ net.locale.LocaleTimeZoneNameProvider
 java.lang.UnsupportedOperationException
 java.util.spi.TimeZoneNameProvider
 ||:net.locale.LocaleCurrencyNameProvider
+net.locale.LocaleInfo
 net.locale.LocaleCurrencyNameProvider
-java.lang.UnsupportedOperationException
 java.util.spi.CurrencyNameProvider
 ||:net.locale.sinhala.BreakIteratorProvider_si_LK
 net.locale.sinhala.BreakIteratorProvider_si_LK

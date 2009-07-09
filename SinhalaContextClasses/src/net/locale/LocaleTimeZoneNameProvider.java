@@ -18,12 +18,16 @@ public abstract class LocaleTimeZoneNameProvider extends TimeZoneNameProvider{
     
     @Override
     public String getDisplayName(String ID, boolean daylight, int style, Locale locale) {
-        throw new UnsupportedOperationException("Not supported yet.");
+	
+        LocaleInfo localeInfo = getLocaleData();
+        localeInfo.checkLocaleSupported(locale);       
+        
+        return localeInfo.getTimeZone();
     }
 
     @Override
     public Locale[] getAvailableLocales() {
-        throw new UnsupportedOperationException("Not supported yet.");
+	return getLocaleData().getSupportedLocales();
     }
 
 }

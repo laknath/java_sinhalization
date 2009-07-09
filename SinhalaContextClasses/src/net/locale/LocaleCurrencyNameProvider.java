@@ -18,12 +18,14 @@ public abstract class LocaleCurrencyNameProvider extends CurrencyNameProvider{
     
     @Override
     public String getSymbol(String currencyCode, Locale locale) {
-        throw new UnsupportedOperationException("Not supported yet.");
+	getLocaleData().checkLocaleSupported(locale);        
+        
+        return getLocaleData().getCurrencySymbol();
     }
 
     @Override
     public Locale[] getAvailableLocales() {
-        throw new UnsupportedOperationException("Not supported yet.");
+	return getLocaleData().getSupportedLocales();
     }
 
 }

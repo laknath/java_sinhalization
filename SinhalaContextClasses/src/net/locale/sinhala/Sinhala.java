@@ -52,6 +52,8 @@ class Sinhala implements LocaleInfo{
             
     private static final String[] SHORT_WEEKDAYS = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
 
+    private static final String TIME_Zone = "IST";    
+    
     private static final String DATE_SHORT = "yy.MM.dd.";
 
     private static final String DATE_MEDIUM = "yyyy.MM.dd.";
@@ -266,4 +268,8 @@ class Sinhala implements LocaleInfo{
 	return Collator.getInstance(si_LK_LOCALE); 												// locale
     }    
     
+    public String getTimeZone(){
+        
+        return TIME_Zone;
+    }
 }
