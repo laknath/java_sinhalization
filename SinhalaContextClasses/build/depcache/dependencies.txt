@@ -38,8 +38,8 @@ net.locale.LocaleNumberFormatProvider
 net.locale.LocaleDecimalFormatSymbols
 java.math.RoundingMode
 ||:net.locale.LocaleTimeZoneNameProvider
+net.locale.LocaleInfo
 net.locale.LocaleTimeZoneNameProvider
-java.lang.UnsupportedOperationException
 java.util.spi.TimeZoneNameProvider
 ||:net.locale.LocaleCurrencyNameProvider
 net.locale.LocaleInfo
@@ -54,6 +54,7 @@ net.locale.LocaleInfo
 java.lang.String
 java.lang.Character
 java.lang.IllegalArgumentException
+[[Ljava.lang.String;
 net.locale.LocaleLocaleNameProvider
 java.util.spi.LocaleNameProvider
 ||:net.locale.sinhala.DecimalFormatSymbolsProvider_si_LK
@@ -72,6 +73,7 @@ net.locale.sinhala.DateFormatProvider_si_LK
 ||:net.locale.sinhala.Sinhala
 java.lang.StringBuilder
 java.text.Collator
+[Ljava.util.Locale;
 net.locale.LocaleInfo
 net.locale.sinhala.Sinhala
 java.lang.IllegalArgumentException
@@ -86,6 +88,7 @@ net.locale.sinhala.Sinhala
 net.locale.LocaleDateFormatSymbolsProvider
 ||:net.locale.LocaleDateFormatProvider
 java.text.spi.DateFormatProvider
+java.lang.String
 net.locale.LocaleInfo
 net.locale.LocaleDateFormatSymbols
 java.text.SimpleDateFormat
@@ -96,12 +99,12 @@ java.lang.StringBuilder
 net.locale.LocaleInfo
 java.text.DecimalFormatSymbols
 net.locale.LocaleDecimalFormatSymbols
-||:net.locale.sinhala.LocaleNameProvider_si_LK
-net.locale.sinhala.LocaleNameProvider_si_LK
-net.locale.LocaleLocaleNameProvider
-net.locale.sinhala.Sinhala
 ||:net.locale.LocaleDateFormatSymbolsProvider
 net.locale.LocaleInfo
 net.locale.LocaleDateFormatSymbols
 java.text.spi.DateFormatSymbolsProvider
 net.locale.LocaleDateFormatSymbolsProvider
+||:net.locale.sinhala.LocaleNameProvider_si_LK
+net.locale.sinhala.LocaleNameProvider_si_LK
+net.locale.LocaleLocaleNameProvider
+net.locale.sinhala.Sinhala

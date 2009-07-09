@@ -16,7 +16,7 @@ import net.locale.LocaleInfo;
  */
 class Sinhala implements LocaleInfo{
 
-    private static final Locale si_LK_LOCALE = new Locale("si_LK");
+    private static final Locale si_LK_LOCALE = new Locale("si","LK");
 
     private static final Locale[] SUPPORTED_LOCALES = { si_LK_LOCALE };
 
