@@ -60,5 +60,7 @@ public class SinhalaContextExampleApp extends SingleFrameApplication {
         String sinhalaTime = sinhala.format(now);
         System.out.println("Sri Lanka: " + sinhalaTime);
 
+        Currency
+        
     }
 }
