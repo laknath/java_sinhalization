@@ -52,7 +52,7 @@ class Sinhala implements LocaleInfo{
             
     private static final String[] SHORT_WEEKDAYS = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
 
-    private static final String TIME_Zone = "IST";    
+    private static final String TIME_Zone = "UTC + 5.30";    
     
     private static final String DATE_SHORT = "yy.MM.dd.";
 

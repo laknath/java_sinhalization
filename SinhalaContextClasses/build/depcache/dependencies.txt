@@ -99,12 +99,12 @@ java.lang.StringBuilder
 net.locale.LocaleInfo
 java.text.DecimalFormatSymbols
 net.locale.LocaleDecimalFormatSymbols
+||:net.locale.sinhala.LocaleNameProvider_si_LK
+net.locale.sinhala.LocaleNameProvider_si_LK
+net.locale.LocaleLocaleNameProvider
+net.locale.sinhala.Sinhala
 ||:net.locale.LocaleDateFormatSymbolsProvider
 net.locale.LocaleInfo
 net.locale.LocaleDateFormatSymbols
 java.text.spi.DateFormatSymbolsProvider
 net.locale.LocaleDateFormatSymbolsProvider
-||:net.locale.sinhala.LocaleNameProvider_si_LK
-net.locale.sinhala.LocaleNameProvider_si_LK
-net.locale.LocaleLocaleNameProvider
-net.locale.sinhala.Sinhala
