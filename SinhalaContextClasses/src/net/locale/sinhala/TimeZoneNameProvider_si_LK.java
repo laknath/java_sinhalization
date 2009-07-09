@@ -8,8 +8,6 @@ package net.locale.sinhala;
 import net.locale.LocaleInfo;
 import net.locale.LocaleTimeZoneNameProvider;
 
-
-
 /**
  *
  * @author Buddhika Laknath

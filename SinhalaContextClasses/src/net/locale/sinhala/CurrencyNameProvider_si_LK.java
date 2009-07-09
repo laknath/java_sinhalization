@@ -5,14 +5,14 @@
 
 package net.locale.sinhala;
 
-import net.locale.LocaleCollatorProvider;
+import net.locale.LocaleCurrencyNameProvider;
 import net.locale.LocaleInfo;
 
 /**
  *
  * @author Buddhika Laknath
  */
-public class CurrencyNameProvider_si_LK extends LocaleCollatorProvider{
+public class CurrencyNameProvider_si_LK extends LocaleCurrencyNameProvider{
 
     static final private LocaleInfo localeData = new Sinhala();    
     
