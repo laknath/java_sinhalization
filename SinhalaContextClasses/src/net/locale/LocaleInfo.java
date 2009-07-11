@@ -83,7 +83,5 @@ public interface LocaleInfo extends Serializable{
 	char getZeroDigit();
 
 	Collator getCollator();
-        
-        String getTimeZone();
 
 }
