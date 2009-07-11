@@ -133,7 +133,7 @@ class Sinhala implements LocaleInfo{
     }
 
     public String[][] getCountryTuples() {
-	return COUNTRY_TUPLES;
+        return COUNTRY_TUPLES;
     }
 
     public String getCurrencyFormat() {
