@@ -88,7 +88,7 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel1">
                   <Properties>
-                    <Property name="font" type="java.awt.Font" noResource="true" editor="org.netbeans.beaninfo.editors.FontEditor">
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="DejaVu Sans" size="13" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" resourceKey="jLabel1.text"/>
@@ -128,6 +128,9 @@
                     <Property name="text" type="java.lang.String" resourceKey="jTextField2.text"/>
                     <Property name="name" type="java.lang.String" value="jTextField2" noResource="true"/>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>

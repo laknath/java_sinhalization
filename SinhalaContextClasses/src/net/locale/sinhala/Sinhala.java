@@ -105,31 +105,27 @@ class Sinhala implements LocaleInfo{
     private static final String[][] COUNTRY_TUPLES = { { "LK", "Sri Lanka" }};
 
     
-    private static final String[][] LANGUAGE_TUPLES = { { "en", "English" }, 
-                                                        { "si", "Sinhala" },
-                                                        { "ta", "Tamil" }
-                                                        };
+    private static final String[][] LANGUAGE_TUPLES =   {{ "si", "සිංහල" }};
 
    
     public void checkLocaleSupported(Locale locale) {
-	if (locale == null) {
-		throw new NullPointerException("locale must not be null");
-	}
+        if (locale == null) {
+            throw new NullPointerException("locale must not be null");
+        }
 
-	// exact search
-	for (Locale supported : getSupportedLocales()) {
+        // exact search
+        for (Locale supported : getSupportedLocales()) {
         	if (locale.equals(supported))
 			return;
 		}
 
-	// relaxed search (seems to be necessary, but might also be a trouble
-	// spot?)
-	for (Locale supported : getSupportedLocales()) {
-		if (locale.getLanguage().equals(supported.getLanguage()))
-			return;
-	}
+        //relaxed search
+        for (Locale supported : getSupportedLocales()) {
+            if (locale.getLanguage().equals(supported.getLanguage()))
+                return;
+        }
 
-	throw new IllegalArgumentException("unsupported locale " + locale);
+        throw new IllegalArgumentException("unsupported locale " + locale);
     }
 
     public String[][] getCountryTuples() {
@@ -137,11 +133,11 @@ class Sinhala implements LocaleInfo{
     }
 
     public String getCurrencyFormat() {
-	return CURRENCY_FORMAT;
+        return CURRENCY_FORMAT;
     }
 
     public String getCurrencySymbol() {
-	return CURRENCY_SYMBOL;
+        return CURRENCY_SYMBOL;
     }
 
     public String getDateFull() {
@@ -157,7 +153,7 @@ class Sinhala implements LocaleInfo{
     }
 
     public String getDateShort() {
-	return DATE_SHORT;
+        return DATE_SHORT;
     }
 
     public char getDecimalSeparator() {
@@ -169,7 +165,7 @@ class Sinhala implements LocaleInfo{
     }
 
     public String[] getEras() {
-	return ERAS;
+        return ERAS;
     }
 
     public String getExponentSeparator() {
@@ -193,7 +189,7 @@ class Sinhala implements LocaleInfo{
     }
 
     public char getMinusSign() {
-	return MINUS_SIGN;
+        return MINUS_SIGN;
     }
 
     public String[] getMonths() {
@@ -209,7 +205,7 @@ class Sinhala implements LocaleInfo{
     }
 
     public String getPatternChars() {
-	return PATTERN_CHARS;
+        return PATTERN_CHARS;
     }
 
     public char getPatternSeparator() {
@@ -217,11 +213,11 @@ class Sinhala implements LocaleInfo{
     }
 
     public char getPercent() {
-	return PERCENT;
+        return PERCENT;
     }
 
     public String getPercentFormat() {
-	return PERCENT_FORMAT;
+        return PERCENT_FORMAT;
     }
 
     public char getPerMille() {
@@ -245,7 +241,7 @@ class Sinhala implements LocaleInfo{
     }
 
     public String getTimeLong() {
-	return TIME_LONG;
+        return TIME_LONG;
     }
 
     public String getTimeMedium() {
@@ -257,7 +253,7 @@ class Sinhala implements LocaleInfo{
     }
 
     public String[] getWeekdays() {
-	return WEEKDAYS;
+        return WEEKDAYS;
     }
 
     public char getZeroDigit() {
@@ -265,7 +261,7 @@ class Sinhala implements LocaleInfo{
     }
 
     public Collator getCollator() {
-	return Collator.getInstance(si_LK_LOCALE); 												// locale
+        return Collator.getInstance(si_LK_LOCALE); 												// locale
     }    
     
     public String getTimeZone(){

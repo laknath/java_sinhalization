@@ -26,7 +26,7 @@ public class SinhalaContextExampleView extends FrameView {
         super(app);
 
         initComponents();
-        functions = new Functions(this);
+        this.functions = new Functions(this);
 
         // status bar initialization - message timeout, idle icon and busy animation, etc
         ResourceMap resourceMap = getResourceMap();
@@ -129,7 +129,7 @@ public class SinhalaContextExampleView extends FrameView {
 
         jPanel1.setName("jPanel1"); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("DejaVu Sans", 1, 13)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(sinhalacontextexample.SinhalaContextExampleApp.class).getContext().getResourceMap(SinhalaContextExampleView.class);
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
@@ -311,8 +311,8 @@ public class SinhalaContextExampleView extends FrameView {
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
 
-        if (evt.getStateChange() == ItemEvent.SELECTED){
-            functions.onItemSelected(evt);
+        if (evt.getStateChange() == ItemEvent.SELECTED && this.functions != null){
+            this.functions.onItemSelected(evt);
         }
 
     }//GEN-LAST:event_jComboBox1ItemStateChanged
@@ -327,7 +327,7 @@ public class SinhalaContextExampleView extends FrameView {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    public javax.swing.JTextField jTextField2;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JProgressBar progressBar;
