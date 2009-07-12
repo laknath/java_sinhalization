@@ -12,7 +12,7 @@ public abstract class LocaleLocaleNameProvider extends LocaleNameProvider {
 		getLocaleData().checkLocaleSupported(locale);
 
 		if (badCountryCodeFormat(countryCode)) {
-			throw new IllegalArgumentException("country code not in required format");
+			throw new IllegalArgumentException("country code is not in the required format");
 		}
 
 		for (String[] tuple : getLocaleData().getCountryTuples()) {
@@ -27,17 +27,12 @@ public abstract class LocaleLocaleNameProvider extends LocaleNameProvider {
 		return null;
 	}
 
-	private boolean badCountryCodeFormat(String countryCode) {
-		return countryCode.length() != 2 || Character.isLowerCase(countryCode.charAt(0))
-				|| Character.isLowerCase(countryCode.charAt(1));
-	}
-
 	@Override
 	public String getDisplayLanguage(String languageCode, Locale locale) {
 		getLocaleData().checkLocaleSupported(locale);
 
 		if (badLanguageCodeFormat(languageCode)) {
-			throw new IllegalArgumentException("language code not in required format");
+			throw new IllegalArgumentException("language code is not in the required format");
 		}
 
 		for (String[] tuple : getLocaleData().getLanguageTuples()) {
@@ -52,20 +47,24 @@ public abstract class LocaleLocaleNameProvider extends LocaleNameProvider {
 		return null;
 	}
 
-	private boolean badLanguageCodeFormat(String languageCode) {
-		return languageCode.length() != 2 || Character.isUpperCase(languageCode.charAt(0))
-				|| Character.isUpperCase(languageCode.charAt(1));
-	}
-
 	@Override
 	public String getDisplayVariant(String variant, Locale locale) {
 		return null;
 	}
 
-
 	@Override
 	public Locale[] getAvailableLocales() {
 		return getLocaleData().getSupportedLocales();
+	}
+
+	private boolean badCountryCodeFormat(String countryCode) {
+		return countryCode.length() != 2 || Character.isLowerCase(countryCode.charAt(0))
+				|| Character.isLowerCase(countryCode.charAt(1));
+	}
+    
+	private boolean badLanguageCodeFormat(String languageCode) {
+		return languageCode.length() != 2 || Character.isUpperCase(languageCode.charAt(0))
+				|| Character.isUpperCase(languageCode.charAt(1));
 	}
 
 }

@@ -44,11 +44,7 @@ public class SinhalaContextExampleApp extends SingleFrameApplication {
     public static void main(String[] args) {
         launch(SinhalaContextExampleApp.class, args);
 
-        System.out.println("Available locales:");
-	Locale list[] = DateFormat.getAvailableLocales();
-	for (Locale aLocale : list) {
-	    System.out.println(aLocale.toString());
-	}
+        /*
         
         Date now = new Date();        
         // Display using the Antarctica locale format
@@ -59,6 +55,6 @@ public class SinhalaContextExampleApp extends SingleFrameApplication {
 
         String antarcticaString = antarcticaFormat.format(now);
         System.out.println("Sri Lanka: " + antarcticaString);
-
+        */
     }
 }
