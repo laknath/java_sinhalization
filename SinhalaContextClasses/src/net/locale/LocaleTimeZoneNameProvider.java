@@ -27,7 +27,7 @@ public abstract class LocaleTimeZoneNameProvider extends TimeZoneNameProvider{
 
     @Override
     public Locale[] getAvailableLocales() {
-	return getLocaleData().getSupportedLocales();
+        return getLocaleData().getSupportedLocales();
     }
 
 }

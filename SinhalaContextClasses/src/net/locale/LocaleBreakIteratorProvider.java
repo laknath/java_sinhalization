@@ -6,60 +6,43 @@
 package net.locale;
 
 import java.text.BreakIterator;
-import java.text.CharacterIterator;
+import java.text.spi.BreakIteratorProvider;
+import java.util.Locale;
 
 
 /**
  *
  * @author Buddhika Laknath
  */
-public abstract class LocaleBreakIteratorProvider extends BreakIterator{
+public abstract class LocaleBreakIteratorProvider extends BreakIteratorProvider{
 
-    public abstract LocaleInfo getLocaleData();    
-    
+    public abstract LocaleInfo getLocaleData();
+
     @Override
-    public int first() {
+    public BreakIterator getWordInstance(Locale arg0) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public int last() {
+    public BreakIterator getLineInstance(Locale arg0) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public int next(int n) {
+    public BreakIterator getCharacterInstance(Locale arg0) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public int next() {
+    public BreakIterator getSentenceInstance(Locale arg0) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public int previous() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Locale[] getAvailableLocales() {
+        return getLocaleData().getSupportedLocales();
     }
 
-    @Override
-    public int following(int offset) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 
-    @Override
-    public int current() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public CharacterIterator getText() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void setText(CharacterIterator newText) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 
 }
