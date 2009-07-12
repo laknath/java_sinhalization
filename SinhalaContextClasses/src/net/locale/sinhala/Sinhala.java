@@ -7,6 +7,7 @@ package net.locale.sinhala;
 
 import java.text.Collator;
 import java.util.Locale;
+import java.util.TimeZone;
 import net.locale.LocaleInfo;
 
 
@@ -52,7 +53,9 @@ class Sinhala implements LocaleInfo{
             
     private static final String[] SHORT_WEEKDAYS = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
 
-    private static final String TIME_Zone = "UTC + 5.30";    
+    private static final String LONG_TIMEZONE_NAME = "Indian Standard Time";
+
+    private static final String SHORT_TIMEZONE_NAME = "IST";
     
     private static final String DATE_SHORT = "yy.MM.dd.";
 
@@ -264,8 +267,20 @@ class Sinhala implements LocaleInfo{
         return Collator.getInstance(si_LK_LOCALE); 												// locale
     }    
     
-    public String getTimeZone(){
-        
-        return TIME_Zone;
+    public String getTimeZone(String ID, boolean daylight, int style){
+
+        if (ID.equalsIgnoreCase("Asia/Colombo") || TimeZone.getTimeZone(ID).getID().equals("GMT+05:30")){
+            
+            if (style == TimeZone.SHORT){
+                return SHORT_TIMEZONE_NAME;
+            }else{
+                return LONG_TIMEZONE_NAME;
+            }
+
+        }else{
+
+            return TimeZone.getTimeZone(ID).getDisplayName(daylight, style);
+            
+        }
     }
 }

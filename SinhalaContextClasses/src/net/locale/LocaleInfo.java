@@ -84,6 +84,6 @@ public interface LocaleInfo extends Serializable{
 
 	Collator getCollator();
 
-    String getTimeZone();
+    String getTimeZone(String ID, boolean daylight, int style);
 
 }

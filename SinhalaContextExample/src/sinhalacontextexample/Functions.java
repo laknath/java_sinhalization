@@ -7,6 +7,7 @@ package sinhalacontextexample;
 
 import java.awt.event.ItemEvent;
 import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  *
@@ -24,6 +25,13 @@ public class Functions {
         for (Locale aLocale : list) {
             this.view.jComboBox1.addItem(aLocale.toString()) ;
         }
+
+        String[] ids = TimeZone.getAvailableIDs();
+
+        for (String id : ids){
+            System.out.println(id);
+        }
+
     }
 
 
@@ -57,6 +65,7 @@ public class Functions {
         }
 
 
+
         /* Demo Locale.getDisplayLanguage(java.util.Locale) */
         this.view.jTextField2.setText(this.locale.getDisplayLanguage(this.locale));
 
@@ -65,6 +74,16 @@ public class Functions {
 
         /* Demo Locale.getDisplayVariant(java.util.Locale) */
         this.view.jTextField4.setText(this.locale.getDisplayVariant(this.locale));
+
+
+        TimeZone zone = TimeZone.getTimeZone("Asia/Colombo");
+
+
+        /* Demo TimeZone.getDisplayName(true, TimeZone.SHORT, locale) */
+        this.view.jTextField5.setText(zone.getDisplayName(true, TimeZone.SHORT, this.locale));
+
+        /* Demo TimeZone.getDisplayName(true, TimeZone.LONG, locale) */
+        this.view.jTextField6.setText(zone.getDisplayName(false, TimeZone.LONG, this.locale));
 
         System.out.println(selectedItem);
     }
@@ -79,6 +98,7 @@ public class Functions {
         this.view.jTextField2.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
         this.view.jTextField3.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
         this.view.jTextField4.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
+
     }
 
 }

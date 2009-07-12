@@ -22,7 +22,7 @@ public abstract class LocaleTimeZoneNameProvider extends TimeZoneNameProvider{
         LocaleInfo localeInfo = getLocaleData();
         localeInfo.checkLocaleSupported(locale);       
         
-        return localeInfo.getTimeZone();
+        return localeInfo.getTimeZone(ID, daylight, style);
     }
 
     @Override
