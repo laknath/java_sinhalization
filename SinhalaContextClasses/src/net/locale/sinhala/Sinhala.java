@@ -102,7 +102,7 @@ class Sinhala implements LocaleInfo{
 
     private static final String CURRENCY_FORMAT = "Rs. #,##0.00";
 
-    private static final String[][] COUNTRY_TUPLES = { { "LK", "Sri Lanka" }};
+    private static final String[][] COUNTRY_TUPLES = { { "LK", "ශ්‍රි ලංකාව" }};
 
     
     private static final String[][] LANGUAGE_TUPLES =   {{ "si", "සිංහල" }};
