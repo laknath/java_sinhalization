@@ -23,24 +23,24 @@ class Sinhala implements LocaleInfo{
 
     private static final String[] ERAS = { "I.S.T.", "L.K.T." };
 
-    private static final String PATTERN_CHARS = "abcdefghijklmnopqrstuvwyz";
+    private static final String PATTERN_CHARS = "අ, ආ, ඇ, ඈ, ඉ, ඊ, උ, ඌ, ඍ, ඎ,  ඏ,  ඐ , එ, ඒ, ඓ, ඔ, ඕ, ඖ, ං, ඃ, ක, ඛ, ග, ඝ, ඞ, ඟ, ච, ඡ, ජ, ඣ, ඤ, ඥ, ඦ, ට, ඨ, ඩ, ඪ, ණ, ඬ, ත, ථ, ද, ධ, න, ඳ, ප, ඵ, බ, භ, ම, ඹ, ය, ර, ල, ව, ශ, ෂ, ස, හ, ළ, ෆ";
 
-    private static final String[] MONTHS = { "\u0da2\u0db1\u0dc0\u0dcf\u0dbb\u0dd2", 
-                                            "\u0db4\u0dd9\u0db6\u0dbb\u0dc0\u0dcf\u0dbb\u0dd2", 
-                                            "\u0db8\u0dcf\u0dbb\u0dca\u0dad\u0dd4", 
-                                            "\u0d85\u0db4\u0dca\u200d\u0dbb\u0dda\u0dbd\u0dca", 
-                                            "\u0db8\u0dd0\u0dba\u0dd2", 
-                                            "\u0da2\u0dd4\u0db1\u0dd2", 
-                                            "\u0da2\u0dd6\u0dbd\u0dd2", 
-                                            "\u0d85\u0d9c\u0ddd\u0dc3\u0dca\u0dad\u0dd4",
-                                            "\u0dc3\u0dd0\u0db4\u0dca\u0dad\u0dd0\u0db8\u0dca\u0db6\u0dbb\u0dca", 
-                                            "\u0d94\u0d9a\u0dca\u0dad\u0ddd\u0db6\u0dbb\u0dca", 
-                                            "\u0db1\u0ddc\u0dc0\u0dd0\u0db8\u0dca\u0db6\u0dbb\u0dca", 
-                                            "\u0daf\u0dd9\u0dc3\u0dd0\u0db8\u0dca\u0db6\u0dbb\u0dca" 
+    private static final String[] MONTHS = { "ජනවාරි", 
+                                            "පෙබරවාරි", 
+                                            "මාර්තු", 
+                                            "අප්‍රේල්", 
+                                            "මැයි", 
+                                            "ජූනි", 
+                                            "ජූලි", 
+                                            "අගෝස්තු",
+                                            "සැප්තැම්බර්", 
+                                            "ඔක්තෝබර්", 
+                                            "නොවැම්බර්", 
+                                            "දෙසැම්බර්" 
                                         };
 
-    private static final String[] SHORT_MONTHS = { "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov",
-                                                "Dec" };
+    private static final String[] SHORT_MONTHS = { "ජන", "පෙබ", "මාර්තු", "අප්‍රේල්", "මැයි", "ජූනි", "ජූලි", "අගෝ", "සැප්", "ඔක්", "නොවැ",
+                                                "දෙසැ" };
 
     private static final String[] WEEKDAYS = { "\u0d89\u0dbb\u0dd2\u0daf\u0dcf", 
                                                 "\u0dc3\u0daf\u0dd4\u0daf", 
@@ -53,9 +53,9 @@ class Sinhala implements LocaleInfo{
             
     private static final String[] SHORT_WEEKDAYS = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
 
-    private static final String LONG_TIMEZONE_NAME = "Indian Standard Time";
+    private static final String LONG_TIMEZONE_NAME = "Sri Lanka Standard Time";
 
-    private static final String SHORT_TIMEZONE_NAME = "IST";
+    private static final String SHORT_TIMEZONE_NAME = "LKT";
     
     private static final String DATE_SHORT = "yy.MM.dd.";
 

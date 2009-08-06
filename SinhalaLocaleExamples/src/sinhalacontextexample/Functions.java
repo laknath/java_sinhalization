@@ -65,7 +65,6 @@ public class Functions {
         }
 
 
-
         /* Demo Locale.getDisplayLanguage(java.util.Locale) */
         this.view.jTextField2.setText(this.locale.getDisplayLanguage(this.locale));
 
