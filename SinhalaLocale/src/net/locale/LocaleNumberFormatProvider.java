@@ -58,7 +58,7 @@ public abstract class LocaleNumberFormatProvider extends NumberFormatProvider {
 		DecimalFormat percentInstance = new DecimalFormat(getLocaleData().getPercentFormat(),
 				new LocaleDecimalFormatSymbols(getLocaleData()));
 		percentInstance.setRoundingMode(RoundingMode.HALF_UP);
-
+        
 		return percentInstance;
 	}
 
