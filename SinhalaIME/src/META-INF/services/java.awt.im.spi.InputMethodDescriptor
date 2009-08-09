@@ -1,0 +1,8 @@
+#
+# @(#)java.awt.im.spi.InputMethodDescriptor	1.2 99/08/02
+#
+# fully-qualified name of the java.awt.im.spi.InputMethodDescriptor
+# implementation class
+#
+
+net.sinhalaim.internal.CityInputMethodDescriptor
