@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="buddhika-laptop" name="net.locale.sinhala.NumberFormatProvider_si_LKTest" tests="4" time="0.095" timestamp="2009-08-09T19:05:30">
+<testsuite errors="0" failures="0" hostname="buddhika-laptop" name="net.locale.sinhala.NumberFormatProvider_si_LKTest" tests="4" time="0.091" timestamp="2009-08-09T19:06:48">
   <properties>
     <property name="default.javac.source" value="1.6" />
     <property name="file.encoding.pkg" value="sun.io" />
@@ -226,7 +226,7 @@
   </properties>
   <testcase classname="net.locale.sinhala.NumberFormatProvider_si_LKTest" name="testGetCurrencyInstance" time="0.0050" />
   <testcase classname="net.locale.sinhala.NumberFormatProvider_si_LKTest" name="testGetIntegerInstance" time="0.0010" />
-  <testcase classname="net.locale.sinhala.NumberFormatProvider_si_LKTest" name="testGetNumberInstance" time="0.0010" />
+  <testcase classname="net.locale.sinhala.NumberFormatProvider_si_LKTest" name="testGetNumberInstance" time="0.0020" />
   <testcase classname="net.locale.sinhala.NumberFormatProvider_si_LKTest" name="testGetPercentInstance" time="0.0020" />
   <system-out><![CDATA[gsetCurrencyInstance
 getIntegerInstance

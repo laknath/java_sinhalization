@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="buddhika-laptop" name="net.locale.sinhala.DateFormatProvider_si_LKTest" tests="3" time="0.094" timestamp="2009-08-09T19:05:27">
+<testsuite errors="0" failures="0" hostname="buddhika-laptop" name="net.locale.sinhala.DateFormatProvider_si_LKTest" tests="3" time="0.097" timestamp="2009-08-09T19:06:46">
   <properties>
     <property name="default.javac.source" value="1.6" />
     <property name="file.encoding.pkg" value="sun.io" />
@@ -224,7 +224,7 @@
     <property name="libs.JWSAntTasks.javadoc" value="" />
     <property name="sun.arch.data.model" value="32" />
   </properties>
-  <testcase classname="net.locale.sinhala.DateFormatProvider_si_LKTest" name="testGetDateInstance" time="0.011" />
+  <testcase classname="net.locale.sinhala.DateFormatProvider_si_LKTest" name="testGetDateInstance" time="0.01" />
   <testcase classname="net.locale.sinhala.DateFormatProvider_si_LKTest" name="testGetTimeInstance" time="0.0020" />
   <testcase classname="net.locale.sinhala.DateFormatProvider_si_LKTest" name="testGetDateTimeInstance" time="0.0020" />
   <system-out><![CDATA[getDateInstance

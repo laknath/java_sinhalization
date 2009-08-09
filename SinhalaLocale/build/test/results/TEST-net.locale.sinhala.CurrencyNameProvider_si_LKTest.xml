@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="buddhika-laptop" name="net.locale.sinhala.CurrencyNameProvider_si_LKTest" tests="1" time="0.085" timestamp="2009-08-09T19:05:27">
+<testsuite errors="0" failures="0" hostname="buddhika-laptop" name="net.locale.sinhala.CurrencyNameProvider_si_LKTest" tests="1" time="0.102" timestamp="2009-08-09T19:06:45">
   <properties>
     <property name="default.javac.source" value="1.6" />
     <property name="file.encoding.pkg" value="sun.io" />

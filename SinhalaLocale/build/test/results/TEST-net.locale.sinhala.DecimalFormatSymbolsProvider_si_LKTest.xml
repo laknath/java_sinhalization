@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="buddhika-laptop" name="net.locale.sinhala.DecimalFormatSymbolsProvider_si_LKTest" tests="1" time="0.1" timestamp="2009-08-09T19:05:28">
+<testsuite errors="0" failures="0" hostname="buddhika-laptop" name="net.locale.sinhala.DecimalFormatSymbolsProvider_si_LKTest" tests="1" time="0.099" timestamp="2009-08-09T19:06:47">
   <properties>
     <property name="default.javac.source" value="1.6" />
     <property name="file.encoding.pkg" value="sun.io" />
@@ -224,7 +224,7 @@
     <property name="libs.JWSAntTasks.javadoc" value="" />
     <property name="sun.arch.data.model" value="32" />
   </properties>
-  <testcase classname="net.locale.sinhala.DecimalFormatSymbolsProvider_si_LKTest" name="testGetLocaleData" time="0.0050" />
+  <testcase classname="net.locale.sinhala.DecimalFormatSymbolsProvider_si_LKTest" name="testGetLocaleData" time="0.0090" />
   <system-out><![CDATA[getLocaleData
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="buddhika-laptop" name="net.locale.sinhala.LocaleNameProvider_si_LKTest" tests="2" time="0.101" timestamp="2009-08-09T19:05:29">
+<testsuite errors="0" failures="0" hostname="buddhika-laptop" name="net.locale.sinhala.LocaleNameProvider_si_LKTest" tests="2" time="0.088" timestamp="2009-08-09T19:06:47">
   <properties>
     <property name="default.javac.source" value="1.6" />
     <property name="file.encoding.pkg" value="sun.io" />
@@ -224,8 +224,8 @@
     <property name="libs.JWSAntTasks.javadoc" value="" />
     <property name="sun.arch.data.model" value="32" />
   </properties>
-  <testcase classname="net.locale.sinhala.LocaleNameProvider_si_LKTest" name="testGetDisplayCountry" time="0.01" />
-  <testcase classname="net.locale.sinhala.LocaleNameProvider_si_LKTest" name="testGetDisplayLanguage" time="0.0030" />
+  <testcase classname="net.locale.sinhala.LocaleNameProvider_si_LKTest" name="testGetDisplayCountry" time="0.015" />
+  <testcase classname="net.locale.sinhala.LocaleNameProvider_si_LKTest" name="testGetDisplayLanguage" time="0.0020" />
   <system-out><![CDATA[getDisplayCountry
 getDisplayLanguage
 ]]></system-out>

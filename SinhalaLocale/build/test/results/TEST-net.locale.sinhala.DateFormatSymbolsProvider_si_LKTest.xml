@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="buddhika-laptop" name="net.locale.sinhala.DateFormatSymbolsProvider_si_LKTest" tests="7" time="0.104" timestamp="2009-08-09T19:05:28">
+<testsuite errors="0" failures="0" hostname="buddhika-laptop" name="net.locale.sinhala.DateFormatSymbolsProvider_si_LKTest" tests="7" time="0.099" timestamp="2009-08-09T19:06:46">
   <properties>
     <property name="default.javac.source" value="1.6" />
     <property name="file.encoding.pkg" value="sun.io" />
@@ -224,12 +224,12 @@
     <property name="libs.JWSAntTasks.javadoc" value="" />
     <property name="sun.arch.data.model" value="32" />
   </properties>
-  <testcase classname="net.locale.sinhala.DateFormatSymbolsProvider_si_LKTest" name="testGetEras" time="0.0070" />
-  <testcase classname="net.locale.sinhala.DateFormatSymbolsProvider_si_LKTest" name="testGetAmPmString" time="0.0020" />
-  <testcase classname="net.locale.sinhala.DateFormatSymbolsProvider_si_LKTest" name="testGetMonths" time="0.0010" />
+  <testcase classname="net.locale.sinhala.DateFormatSymbolsProvider_si_LKTest" name="testGetEras" time="0.0060" />
+  <testcase classname="net.locale.sinhala.DateFormatSymbolsProvider_si_LKTest" name="testGetAmPmString" time="0.0010" />
+  <testcase classname="net.locale.sinhala.DateFormatSymbolsProvider_si_LKTest" name="testGetMonths" time="0.0020" />
   <testcase classname="net.locale.sinhala.DateFormatSymbolsProvider_si_LKTest" name="testGetShortMonths" time="0.0020" />
   <testcase classname="net.locale.sinhala.DateFormatSymbolsProvider_si_LKTest" name="testGetWeeks" time="0.0020" />
-  <testcase classname="net.locale.sinhala.DateFormatSymbolsProvider_si_LKTest" name="testGetShortWeeks" time="0.0020" />
+  <testcase classname="net.locale.sinhala.DateFormatSymbolsProvider_si_LKTest" name="testGetShortWeeks" time="0.0010" />
   <testcase classname="net.locale.sinhala.DateFormatSymbolsProvider_si_LKTest" name="testGetLocalPatternChars" time="0.0020" />
   <system-out><![CDATA[getEras
 getAmPmString
