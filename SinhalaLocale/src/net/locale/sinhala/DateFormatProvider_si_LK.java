@@ -20,6 +20,6 @@ public class DateFormatProvider_si_LK extends LocaleDateFormatProvider {
 
     @Override
     public LocaleInfo getLocaleData() {
-	return localeData;
+        return localeData;
     }
 }

@@ -32,7 +32,7 @@ public abstract class LocaleCurrencyNameProvider extends CurrencyNameProvider{
 
     @Override
     public Locale[] getAvailableLocales() {
-	return getLocaleData().getSupportedLocales();
+        return getLocaleData().getSupportedLocales();
     }
 
 }

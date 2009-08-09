@@ -18,6 +18,6 @@ public class LocaleNameProvider_si_LK extends LocaleLocaleNameProvider {
     
     @Override
     public LocaleInfo getLocaleData() {
-	return localeData;
+        return localeData;
     }
 }

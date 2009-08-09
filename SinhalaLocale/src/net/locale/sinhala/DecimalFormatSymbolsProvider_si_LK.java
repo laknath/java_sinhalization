@@ -19,7 +19,7 @@ public class DecimalFormatSymbolsProvider_si_LK extends LocaleDecimalFormatSymbo
 
     @Override
     public LocaleInfo getLocaleData() {
-	return localeData;
+        return localeData;
     }
 
 }

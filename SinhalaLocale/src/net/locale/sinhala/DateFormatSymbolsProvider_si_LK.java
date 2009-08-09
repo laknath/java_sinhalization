@@ -19,6 +19,6 @@ public class DateFormatSymbolsProvider_si_LK extends LocaleDateFormatSymbolsProv
 
     @Override
     public LocaleInfo getLocaleData() {
-	return localeData;
+        return localeData;
     }
 }

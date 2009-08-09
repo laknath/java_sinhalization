@@ -18,7 +18,7 @@ public class CurrencyNameProvider_si_LK extends LocaleCurrencyNameProvider{
     
     @Override
     public LocaleInfo getLocaleData() {
-	return localeData;
+        return localeData;
     }
 
 }

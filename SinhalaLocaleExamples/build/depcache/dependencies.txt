@@ -63,11 +63,6 @@ java.lang.Object
 java.awt.event.ItemListener
 sinhalacontextexample.SinhalaContextExampleView
 sinhalacontextexample.SinhalaContextExampleView$8
-||:sinhalacontextexample.SinhalaContextExampleView$7
-java.lang.Object
-sinhalacontextexample.SinhalaContextExampleView$7
-java.awt.event.ItemListener
-sinhalacontextexample.SinhalaContextExampleView
 ||:sinhalacontextexample.SinhalaContextExampleView
 javax.swing.GroupLayout$Group
 sinhalacontextexample.SinhalaContextExampleAboutBox
@@ -121,6 +116,11 @@ java.text.NumberFormat
 org.jdesktop.application.ResourceMap
 java.util.Date
 javax.swing.JLabel
+||:sinhalacontextexample.SinhalaContextExampleView$7
+java.lang.Object
+sinhalacontextexample.SinhalaContextExampleView$7
+java.awt.event.ItemListener
+sinhalacontextexample.SinhalaContextExampleView
 ||:sinhalacontextexample.SinhalaContextExampleView$6
 java.lang.Object
 sinhalacontextexample.SinhalaContextExampleView$6
