@@ -5,6 +5,7 @@
 
 package net.locale;
 
+import java.util.Currency;
 import java.util.Locale;
 import java.util.spi.CurrencyNameProvider;
 
@@ -18,9 +19,15 @@ public abstract class LocaleCurrencyNameProvider extends CurrencyNameProvider{
     
     @Override
     public String getSymbol(String currencyCode, Locale locale) {
-	getLocaleData().checkLocaleSupported(locale);        
+
+        getLocaleData().checkLocaleSupported(locale);
+
+        if (currencyCode.equals("LKR")){
+            return getLocaleData().getCurrencySymbol();
+        }else{
+            return Currency.getInstance(locale).getSymbol(locale);
+        }
         
-        return getLocaleData().getCurrencySymbol();
     }
 
     @Override

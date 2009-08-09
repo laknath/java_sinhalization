@@ -5,14 +5,15 @@
 
 package sinhalacontextexample;
 
-import java.awt.event.ItemEvent;
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.util.Currency;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-import java.util.spi.CurrencyNameProvider;
 import javax.swing.JComboBox;
 
 /**
@@ -110,7 +111,7 @@ public class Functions {
                                         this.getDateStyle((String)this.view.jComboBox5.getSelectedItem()),
                                         this.locale).format(new Date()));
 
-        /*Demo for DateFormatSymbolProvider */
+        /* Demo for DateFormatSymbolProvider */
         DateFormatSymbols dfs = DateFormatSymbols.getInstance(locale);
 
         addItems(dfs.getEras(), this.view.jComboBox10);
@@ -121,9 +122,32 @@ public class Functions {
         addItems(dfs.getShortWeekdays(), this.view.jComboBox9);
         this.view.jTextField28.setText(dfs.getLocalPatternChars());
 
-        /*Demo for CurrencyNameProvider */
+        /* Demo for CurrencyNameProvider */
         Currency c = Currency.getInstance(locale);
-        this.view.jTextField10.setText(c.getSymbol());
+        this.view.jTextField10.setText(c.getSymbol(locale));
+
+        /* Demo for NumberFormatProvider */
+        this.view.jTextField11.setText(NumberFormat.getCurrencyInstance(locale).format(10000.60));
+        this.view.jTextField12.setText(NumberFormat.getIntegerInstance(locale).format(10000.00));
+        this.view.jTextField13.setText(NumberFormat.getNumberInstance(locale).format(10000.00));
+        this.view.jTextField14.setText(NumberFormat.getPercentInstance(locale).format(0.80));
+
+        /* Demo for DecimalFormatProvider */
+        DecimalFormatSymbols df = new DecimalFormatSymbols(locale);
+
+        this.view.jTextField21.setText(String.valueOf(df.getDecimalSeparator()));
+        this.view.jTextField22.setText(String.valueOf(df.getDigit()));
+        this.view.jTextField23.setText(String.valueOf(df.getExponentSeparator()));
+        this.view.jTextField24.setText(String.valueOf(df.getGroupingSeparator()));
+        this.view.jTextField29.setText(String.valueOf(df.getInfinity()));
+        this.view.jTextField30.setText(String.valueOf(df.getInternationalCurrencySymbol()));
+        this.view.jTextField31.setText(String.valueOf(df.getMinusSign()));
+        this.view.jTextField33.setText(String.valueOf(df.getNaN()));
+        this.view.jTextField34.setText(String.valueOf(df.getPatternSeparator()));
+        this.view.jTextField35.setText(String.valueOf(df.getPercent()));
+        this.view.jTextField36.setText(String.valueOf(df.getPerMill()));
+        this.view.jTextField37.setText(String.valueOf(df.getZeroDigit()));
+
 
     }
 
@@ -134,7 +158,6 @@ public class Functions {
         this.view.jTextField7.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
         this.view.jTextField15.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
         this.view.jTextField9.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
-        this.view.jTextField10.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
         this.view.jComboBox10.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
         this.view.jComboBox11.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
         this.view.jComboBox3.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
@@ -151,7 +174,6 @@ public class Functions {
         this.view.jTextField7.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
         this.view.jTextField15.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
         this.view.jTextField9.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
-        this.view.jTextField10.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
         this.view.jComboBox10.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
         this.view.jComboBox11.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
         this.view.jComboBox3.setFont(new java.awt.Font("DejaVu Sans", 1, 13));

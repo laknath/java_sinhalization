@@ -55,7 +55,9 @@ java.lang.System
 java.util.Locale
 java.util.TimeZone
 java.lang.Object
+java.text.DecimalFormatSymbols
 sinhalacontextexample.SinhalaContextExampleView
+java.text.NumberFormat
 java.util.Date
 java.lang.String
 java.awt.Font
