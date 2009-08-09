@@ -127,10 +127,12 @@ public class Functions {
         this.view.jTextField10.setText(c.getSymbol(locale));
 
         /* Demo for NumberFormatProvider */
-        this.view.jTextField11.setText(NumberFormat.getCurrencyInstance(locale).format(10000.60));
-        this.view.jTextField12.setText(NumberFormat.getIntegerInstance(locale).format(10000.00));
-        this.view.jTextField13.setText(NumberFormat.getNumberInstance(locale).format(10000.00));
-        this.view.jTextField14.setText(NumberFormat.getPercentInstance(locale).format(0.80));
+        this.view.jTextField16.setText("0.00");
+
+        this.view.jTextField11.setText(NumberFormat.getCurrencyInstance(locale).format(0.00));
+        this.view.jTextField12.setText(NumberFormat.getIntegerInstance(locale).format(0.00));
+        this.view.jTextField13.setText(NumberFormat.getNumberInstance(locale).format(0.00));
+        this.view.jTextField14.setText(NumberFormat.getPercentInstance(locale).format(0.00));
 
         /* Demo for DecimalFormatProvider */
         DecimalFormatSymbols df = new DecimalFormatSymbols(locale);

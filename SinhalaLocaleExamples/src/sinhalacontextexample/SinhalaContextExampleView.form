@@ -62,7 +62,7 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="26" max="32767" attributes="0"/>
                           <Component id="jPanel14" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -101,10 +101,10 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jTextField4" alignment="0" pref="333" max="32767" attributes="1"/>
-                                  <Component id="jTextField2" alignment="0" pref="333" max="32767" attributes="1"/>
-                                  <Component id="jComboBox1" alignment="1" pref="333" max="32767" attributes="1"/>
-                                  <Component id="jTextField3" alignment="1" pref="333" max="32767" attributes="1"/>
+                                  <Component id="jTextField4" alignment="0" pref="311" max="32767" attributes="1"/>
+                                  <Component id="jTextField2" alignment="0" pref="311" max="32767" attributes="1"/>
+                                  <Component id="jComboBox1" alignment="1" pref="311" max="32767" attributes="1"/>
+                                  <Component id="jTextField3" alignment="1" pref="311" max="32767" attributes="1"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -133,7 +133,7 @@
                                   <Component id="jLabel4" min="-2" pref="33" max="-2" attributes="0"/>
                                   <Component id="jTextField4" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="310" max="32767" attributes="0"/>
+                              <EmptySpace pref="296" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -972,9 +972,6 @@
                         </Property>
                         <Property name="name" type="java.lang.String" value="jComboBox3" noResource="true"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBox3ItemStateChanged"/>
-                      </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
@@ -986,9 +983,6 @@
                         </Property>
                         <Property name="name" type="java.lang.String" value="jComboBox7" noResource="true"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBox7ItemStateChanged"/>
-                      </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
@@ -1000,9 +994,6 @@
                         </Property>
                         <Property name="name" type="java.lang.String" value="jComboBox8" noResource="true"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBox8ItemStateChanged"/>
-                      </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
@@ -1014,9 +1005,6 @@
                         </Property>
                         <Property name="name" type="java.lang.String" value="jComboBox9" noResource="true"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBox9ItemStateChanged"/>
-                      </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
@@ -1028,9 +1016,6 @@
                         </Property>
                         <Property name="name" type="java.lang.String" value="jComboBox10" noResource="true"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBox10ItemStateChanged"/>
-                      </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
@@ -1042,9 +1027,6 @@
                         </Property>
                         <Property name="name" type="java.lang.String" value="jComboBox11" noResource="true"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jComboBox11ItemStateChanged"/>
-                      </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
                       </AuxValues>
@@ -1192,30 +1174,48 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel9" min="-2" pref="349" max="-2" attributes="1"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jLabel16" alignment="0" max="32767" attributes="1"/>
-                                      <Component id="jLabel15" alignment="0" max="32767" attributes="1"/>
-                                      <Component id="jLabel10" alignment="0" min="-2" pref="343" max="-2" attributes="1"/>
+                                  <Component id="jSeparator1" alignment="0" pref="751" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel12" min="-2" pref="349" max="-2" attributes="1"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jTextField16" pref="390" max="32767" attributes="1"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel9" min="-2" pref="349" max="-2" attributes="1"/>
+                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="jLabel16" alignment="0" max="32767" attributes="1"/>
+                                              <Component id="jLabel15" alignment="0" max="32767" attributes="1"/>
+                                              <Component id="jLabel10" alignment="0" min="-2" pref="343" max="-2" attributes="1"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jTextField14" max="32767" attributes="1"/>
+                                          <Component id="jTextField13" alignment="0" max="32767" attributes="1"/>
+                                          <Component id="jTextField12" alignment="0" max="32767" attributes="1"/>
+                                          <Component id="jTextField11" alignment="1" min="-2" pref="390" max="-2" attributes="1"/>
+                                      </Group>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jTextField14" max="32767" attributes="1"/>
-                                  <Component id="jTextField13" alignment="0" max="32767" attributes="1"/>
-                                  <Component id="jTextField12" alignment="0" max="32767" attributes="1"/>
-                                  <Component id="jTextField11" alignment="0" pref="390" max="32767" attributes="1"/>
-                              </Group>
-                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel12" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                                  <Component id="jTextField16" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel9" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                                   <Component id="jTextField11" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1235,7 +1235,7 @@
                                   <Component id="jLabel16" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                                   <Component id="jTextField14" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="322" max="32767" attributes="0"/>
+                              <EmptySpace pref="249" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1303,6 +1303,29 @@
                         <Property name="font" type="java.awt.Font" resourceKey="jLabel9.font"/>
                         <Property name="text" type="java.lang.String" resourceKey="jLabel9.text"/>
                         <Property name="name" type="java.lang.String" value="jLabel9" noResource="true"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="jTextField16">
+                      <Properties>
+                        <Property name="name" type="java.lang.String" value="jTextField16" noResource="true"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextField16KeyTyped"/>
+                      </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+                      </AuxValues>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel12">
+                      <Properties>
+                        <Property name="font" type="java.awt.Font" resourceKey="jLabel12.font"/>
+                        <Property name="text" type="java.lang.String" resourceKey="jLabel12.text"/>
+                        <Property name="name" type="java.lang.String" value="jLabel12" noResource="true"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JSeparator" name="jSeparator1">
+                      <Properties>
+                        <Property name="name" type="java.lang.String" value="jSeparator1" noResource="true"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -1827,6 +1850,6 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,96,0,0,3,83"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,111,0,0,3,83"/>
   </AuxValues>
 </Form>
