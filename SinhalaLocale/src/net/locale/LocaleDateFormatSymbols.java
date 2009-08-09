@@ -18,6 +18,7 @@ public class LocaleDateFormatSymbols extends DateFormatSymbols {
 		setShortMonths(localeInfo.getShortMonths());
 		setWeekdays(localeInfo.getWeekdays());
 		setShortWeekdays(localeInfo.getShortWeekdays());
+        setAmPmStrings(localeInfo.getAmPmStrings());
 	}
 
 }

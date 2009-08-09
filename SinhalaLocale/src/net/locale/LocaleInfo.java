@@ -86,4 +86,6 @@ public interface LocaleInfo extends Serializable{
 
     String getTimeZone(String ID, boolean daylight, int style);
 
+    String[] getAmPmStrings();
+
 }

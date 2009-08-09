@@ -6,8 +6,14 @@
 package sinhalacontextexample;
 
 import java.awt.event.ItemEvent;
+import java.text.DateFormat;
+import java.text.DateFormatSymbols;
+import java.util.Currency;
+import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.spi.CurrencyNameProvider;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -16,7 +22,7 @@ import java.util.TimeZone;
 public class Functions {
 
     private SinhalaContextExampleView view;
-    private Locale locale;
+    private static Locale locale;
 
     public Functions(SinhalaContextExampleView view){
         this.view = view;
@@ -32,10 +38,13 @@ public class Functions {
             System.out.println(id);
         }
 
+        this.onItemSelected();
+
     }
 
 
-    public void onItemSelected(ItemEvent evt){
+    @SuppressWarnings("static-access")
+    public void onItemSelected(){
         String selectedItem = view.jComboBox1.getSelectedItem().toString();
         String[] localeParts = selectedItem.split("_");
 
@@ -85,19 +94,101 @@ public class Functions {
         this.view.jTextField6.setText(zone.getDisplayName(false, TimeZone.LONG, this.locale));
 
         System.out.println(selectedItem);
+
+        /*Demo for DateFormatProvider */
+
+        /* DateFormat.getTimeInstance(int style, Locale locale) */
+        this.view.jTextField7.setText(DateFormat.getTimeInstance(this.getDateStyle((String)this.view.jComboBox2.getSelectedItem()),
+                                        this.locale).format(new Date()));
+
+        /* DateFormatProvider.getDateInstance(int style, Locale locale) */
+        this.view.jTextField15.setText(DateFormat.getDateInstance(this.getDateStyle((String)this.view.jComboBox6.getSelectedItem()),
+                                        this.locale).format(new Date()));
+
+        /* DateFormat.getDateTimeInstance(int dateStyle, int timeStyle, Locale locale) */
+        this.view.jTextField9.setText(DateFormat.getDateTimeInstance(this.getDateStyle((String)this.view.jComboBox4.getSelectedItem()),
+                                        this.getDateStyle((String)this.view.jComboBox5.getSelectedItem()),
+                                        this.locale).format(new Date()));
+
+        /*Demo for DateFormatSymbolProvider */
+        DateFormatSymbols dfs = DateFormatSymbols.getInstance(locale);
+
+        addItems(dfs.getEras(), this.view.jComboBox10);
+        addItems(dfs.getAmPmStrings(), this.view.jComboBox11);
+        addItems(dfs.getMonths(), this.view.jComboBox3);
+        addItems(dfs.getShortMonths(), this.view.jComboBox7);
+        addItems(dfs.getWeekdays(), this.view.jComboBox8);
+        addItems(dfs.getShortWeekdays(), this.view.jComboBox9);
+        this.view.jTextField28.setText(dfs.getLocalPatternChars());
+
+        /*Demo for CurrencyNameProvider */
+        Currency c = Currency.getInstance(locale);
+        this.view.jTextField10.setText(c.getSymbol());
+
     }
 
     private void setSinhalaFont(){
         this.view.jTextField2.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
         this.view.jTextField3.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
         this.view.jTextField4.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
+        this.view.jTextField7.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
+        this.view.jTextField15.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
+        this.view.jTextField9.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
+        this.view.jTextField10.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
+        this.view.jComboBox10.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
+        this.view.jComboBox11.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
+        this.view.jComboBox3.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
+        this.view.jComboBox7.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
+        this.view.jComboBox8.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
+        this.view.jComboBox9.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
+
     }
 
     private void setDefaultFont(){
         this.view.jTextField2.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
         this.view.jTextField3.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
         this.view.jTextField4.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
-
+        this.view.jTextField7.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
+        this.view.jTextField15.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
+        this.view.jTextField9.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
+        this.view.jTextField10.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
+        this.view.jComboBox10.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
+        this.view.jComboBox11.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
+        this.view.jComboBox3.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
+        this.view.jComboBox7.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
+        this.view.jComboBox8.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
+        this.view.jComboBox9.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
     }
 
+    /* return date style for a given string */
+    public static int getDateStyle(String text){
+
+        int style = 0;
+
+        if (text.equals("SHORT")){
+            style = DateFormat.SHORT;
+        }else if (text.equals("MEDIUM")){
+            style = DateFormat.MEDIUM;
+        }else if (text.equals("LONG")){
+            style = DateFormat.LONG;
+        }else if (text.equals("FULL")){
+            style = DateFormat.FULL;
+        }
+
+        return style;
+    }
+
+    public static Locale getLocale(){
+        return locale;
+    }
+
+    private static void addItems(String[] array, JComboBox box){
+
+        box.removeAllItems();
+
+        for (int i=0;i < array.length; i++){
+            box.addItem(array[i]);
+        }
+
+    }
 }
