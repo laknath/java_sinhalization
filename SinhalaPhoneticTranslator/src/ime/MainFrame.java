@@ -240,7 +240,7 @@ public class MainFrame extends javax.swing.JFrame implements Printable {
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Input Text", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 51, 51))); // NOI18N
+        jTextArea1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Input Text", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DejaVu Sans", 0, 13), new java.awt.Color(0, 51, 51))); // NOI18N
         jTextArea1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextArea1KeyReleased(evt);
@@ -251,11 +251,12 @@ public class MainFrame extends javax.swing.JFrame implements Printable {
         jTextArea2.setColumns(20);
         jTextArea2.setFont(new java.awt.Font("KandyUnicode", 0, 18));
         jTextArea2.setRows(5);
-        jTextArea2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Output Text", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 0, 0))); // NOI18N
+        jTextArea2.setBorder(javax.swing.BorderFactory.createTitledBorder("Output Text"));
         jScrollPane2.setViewportView(jTextArea2);
 
         jMenu1.setText("File");
 
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Load");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -264,6 +265,7 @@ public class MainFrame extends javax.swing.JFrame implements Printable {
         });
         jMenu1.add(jMenuItem1);
 
+        jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem6.setText("Print");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -272,6 +274,7 @@ public class MainFrame extends javax.swing.JFrame implements Printable {
         });
         jMenu1.add(jMenuItem6);
 
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem2.setText("Exit");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -284,6 +287,7 @@ public class MainFrame extends javax.swing.JFrame implements Printable {
 
         jMenu2.setText("Edit");
 
+        jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem5.setText("Copy");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -292,7 +296,13 @@ public class MainFrame extends javax.swing.JFrame implements Printable {
         });
         jMenu2.add(jMenuItem5);
 
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem4.setText("Paste");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem4);
 
         jMenuBar1.add(jMenu2);
@@ -386,27 +396,8 @@ private void jTextArea1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:eve
 }//GEN-LAST:event_jTextArea1KeyReleased
 
 private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-    
-    /*Locale[] locales = Locale.getAvailableLocales();
-        for (Locale locale : locales) {
-            jTextArea1.append(" xx " + locale+"\n");
-        }*/
-    Date now = new Date();
 
-        // Display using the default locale format
-        DateFormat defaultFormat = DateFormat.getDateTimeInstance();
-        String defaultString = defaultFormat.format(now);
-        jTextArea1.append("Default   : " + defaultString+"\n");
-
-        // Display using the Antarctica locale format
-        DateFormat antarcticaFormat =
-                DateFormat.getDateTimeInstance(
-                DateFormat.FULL, DateFormat.FULL,
-                new Locale("si", "LK"));
-
-        String antarcticaString = antarcticaFormat.format(now);
-        jTextArea2.append("Antarctica: " + antarcticaString+"\n");
-
+    this.jTextArea2.copy();
 }//GEN-LAST:event_jMenuItem5ActionPerformed
 
 private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
@@ -429,6 +420,12 @@ private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             }
         }
 }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+
+    this.jTextArea1.paste();
+
+}//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
     * @param args the command line arguments
