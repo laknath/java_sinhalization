@@ -246,14 +246,11 @@ public class SinhalaInputMethod implements InputMethod {
     //Translate the words
     private String translate(String text){
         String s,v;
+        this.isSingleSegment = false;
 
         //special consonents
         for (int i=0; i<specialConsonants.length; i++){
             text = text.replace(specialConsonants[i], specialConsonantsUni[i]);
-
-            if (text.split( specialConsonantsUni[i] ).length > 2){
-                this.isSingleSegment = false;
-            }
         }
         
         //consonents + special Chars
@@ -263,10 +260,6 @@ public class SinhalaInputMethod implements InputMethod {
                 v = consonantsUni[j] + specialCharUni[i];
                 //r = new RegExp(s, "g");
                 text = text.replace(s, v);
-
-                if (text.split( consonantsUni[j] ).length > 2){
-                    this.isSingleSegment = false;
-                }
             }
         }
         //consonants + Rakaransha + vowel modifiers
@@ -276,10 +269,6 @@ public class SinhalaInputMethod implements InputMethod {
                 v = consonantsUni[j] + "්‍ර" + vowelModifiersUni[i];
                 //r = new RegExp(s, "g");
                 text = text.replace(s, v);
-
-                if (text.split( consonantsUni[j] ).length > 2){
-                    this.isSingleSegment = false;
-                }
             }
             s = consonants[j] + "r";
             v = consonantsUni[j] + "්‍ර";
@@ -294,10 +283,6 @@ public class SinhalaInputMethod implements InputMethod {
                 v = consonantsUni[i] + vowelModifiersUni[j];
                 //r = new RegExp(s, "g");
                 text = text.replace(s, v);
-
-                if (text.split( consonantsUni[i] ).length > 2){
-                    this.isSingleSegment = false;
-                }
             }
         }
 
@@ -305,20 +290,12 @@ public class SinhalaInputMethod implements InputMethod {
         for (int i=0; i<consonants.length; i++){
             //r = new RegExp(consonants[i], "g");
             text = text.replace(consonants[i], consonantsUni[i]+"්");
-
-            if (text.split( consonantsUni[i] ).length > 2){
-                this.isSingleSegment = false;
-            }
         }
 
         //vowels
         for (int i=0; i<vowels.length; i++){
             //r = new RegExp(vowels[i], "g");
             text = text.replace(vowels[i], vowelsUni[i]);
-
-            if (text.split( vowelsUni[i] ).length > 2){
-                this.isSingleSegment = false;
-            }
         }
 
         //jTextArea2.setText("meyatuwana");
