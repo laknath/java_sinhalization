@@ -33,7 +33,6 @@ import java.awt.font.TextHitInfo;
 import java.awt.im.InputMethodHighlight;
 import java.awt.im.spi.InputMethod;
 import java.awt.im.spi.InputMethodContext;
-import java.io.InputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.AttributedString;
@@ -116,6 +115,8 @@ public class SinhalaInputMethod implements InputMethod {
     private boolean converted;
     private StringBuffer rawText;
     private String convertedText;
+    private StringBuffer segment;
+    private boolean isSingleSegment = true;
 
     private int insertionPoint;
     private String[] rawTextSegs = null;
@@ -147,6 +148,7 @@ public class SinhalaInputMethod implements InputMethod {
     public SinhalaInputMethod() throws IOException {
         this.initLanguageSettings();
         rawText = new StringBuffer();
+        segment = new StringBuffer();
     }
 
     //Initiate Language Settings
@@ -248,6 +250,10 @@ public class SinhalaInputMethod implements InputMethod {
         //special consonents
         for (int i=0; i<specialConsonants.length; i++){
             text = text.replace(specialConsonants[i], specialConsonantsUni[i]);
+
+            if (text.split( specialConsonantsUni[i] ).length > 2){
+                this.isSingleSegment = false;
+            }
         }
         
         //consonents + special Chars
@@ -257,6 +263,10 @@ public class SinhalaInputMethod implements InputMethod {
                 v = consonantsUni[j] + specialCharUni[i];
                 //r = new RegExp(s, "g");
                 text = text.replace(s, v);
+
+                if (text.split( consonantsUni[j] ).length > 2){
+                    this.isSingleSegment = false;
+                }
             }
         }
         //consonants + Rakaransha + vowel modifiers
@@ -266,11 +276,16 @@ public class SinhalaInputMethod implements InputMethod {
                 v = consonantsUni[j] + "්‍ර" + vowelModifiersUni[i];
                 //r = new RegExp(s, "g");
                 text = text.replace(s, v);
+
+                if (text.split( consonantsUni[j] ).length > 2){
+                    this.isSingleSegment = false;
+                }
             }
             s = consonants[j] + "r";
             v = consonantsUni[j] + "්‍ර";
             //r = new RegExp(s, "g");
             text = text.replace(s, v);
+
         }
         //consonents + vowel modifiers
         for (int i=0;i<consonants.length;i++){
@@ -279,6 +294,10 @@ public class SinhalaInputMethod implements InputMethod {
                 v = consonantsUni[i] + vowelModifiersUni[j];
                 //r = new RegExp(s, "g");
                 text = text.replace(s, v);
+
+                if (text.split( consonantsUni[i] ).length > 2){
+                    this.isSingleSegment = false;
+                }
             }
         }
 
@@ -286,15 +305,22 @@ public class SinhalaInputMethod implements InputMethod {
         for (int i=0; i<consonants.length; i++){
             //r = new RegExp(consonants[i], "g");
             text = text.replace(consonants[i], consonantsUni[i]+"්");
+
+            if (text.split( consonantsUni[i] ).length > 2){
+                this.isSingleSegment = false;
+            }
         }
 
         //vowels
         for (int i=0; i<vowels.length; i++){
             //r = new RegExp(vowels[i], "g");
             text = text.replace(vowels[i], vowelsUni[i]);
+
+            if (text.split( vowelsUni[i] ).length > 2){
+                this.isSingleSegment = false;
+            }
         }
 
-        //jTextArea2.setText(text);
         //jTextArea2.setText("meyatuwana");
         return text;
     }
@@ -426,7 +452,6 @@ public class SinhalaInputMethod implements InputMethod {
             }
         } else if (converted) {
             if (ch == ' ') {
-                convertAgain();
                 return true;
             } else if (ch == '\n') {
                 commitAll();
@@ -439,7 +464,6 @@ public class SinhalaInputMethod implements InputMethod {
             if (ch == ' ') {
                 int length = rawText.length();
                 if (length == 3 || length == 6 || length == 9) {
-                    convertFirstTime();
                     return true;
                 }
             } else if (ch == '\n') {
@@ -455,14 +479,19 @@ public class SinhalaInputMethod implements InputMethod {
                     return true;
                 }
             } else if ('a' <= ch && ch <= 'z' || 'A' <= ch && ch <= 'Z') {
-                rawText.insert(insertionPoint++, ch);
 
-                System.out.println(rawText.toString() + rawText.length());
-                //String sinhalaText = this.translate( rawText.toString() );
-                //rawText.insert(0, sinhalaText);
-                commitAll();
+                segment.insert(insertionPoint++, ch);
+                System.out.println(segment.toString() + segment.length());
+                String sinhalaText = this.translate( segment.toString() );
 
-                sendText(false);
+                if (!this.isSingleSegment){
+                    rawText.insert(0, sinhalaText);
+                    commitAll();
+                    this.segment.setLength(0);
+                    this.isSingleSegment = true;
+                }
+
+                //sendText(false);
                 return true;
             }
             if (rawText.length() != 0) {
@@ -782,61 +811,6 @@ public class SinhalaInputMethod implements InputMethod {
         return cityAliases.getProperty(lookupName, lookupName);
     }
 
-    void convertFirstTime() {
-        numSegs = rawText.length() / 3;
-        rawTextSegs = new String[numSegs];
-        convertedSegs = new String[numSegs];
-        for (int i = 0; i < numSegs; ++i) {
-            rawTextSegs[i] = rawText.substring(i * 3, (i + 1) *3);
-            String alias = findAlias(rawTextSegs[i]);
-            String result = lookup(alias, cityNames);
-            if (result != null) {
-            convertedSegs[i] = result;
-            } else {
-            convertedSegs[i] = rawText.substring(i * 3, (i + 1) * 3);
-            }
-        }
-        converted = true;
-        sendText(false);
-    }
-
-    void convertAgain() {
-        String lookupName;
-        lookupName = rawTextSegs[selectedSeg];
-        // if converted string is same as original, it's not in word list. We skip
-        // further conversion.
-        if (!lookupName.equals(convertedSegs[selectedSeg])) {
-            lookupName = findAlias(lookupName);
-            lookupCandidates = new String[LOOKUP_LOCALES.length];
-            lookupLocales = new Locale[LOOKUP_LOCALES.length];
-            lookupCandidateCount = 0;
-            lookupSelection = 0;
-            for (int i = 0; i < LOOKUP_LOCALES.length; i++) {
-            Locale iLocale = LOOKUP_LOCALES[i];
-            String localeLookupName = lookupName + '_' + iLocale;
-            String localeConvertedText = (String) cityNames.get(localeLookupName);
-            if (localeConvertedText != null) {
-                lookupCandidates[lookupCandidateCount] = localeConvertedText;
-                lookupLocales[lookupCandidateCount] = iLocale;
-                lookupCandidateCount++;
-            } else if (iLocale.equals(Locale.ENGLISH)) {
-                localeConvertedText = (String) cityNames.get(lookupName);
-                if (localeConvertedText != null) {
-                lookupCandidates[lookupCandidateCount] = localeConvertedText;
-                lookupLocales[lookupCandidateCount] = iLocale;
-                lookupCandidateCount++;
-                }
-            }
-            if (convertedSegs[selectedSeg].equals(localeConvertedText)) {
-                lookupSelection = lookupCandidateCount - 1;
-            }
-            }
-            openLookupWindow();
-        } else {
-            Toolkit.getDefaultToolkit().beep();
-        }
-    }
-
     /* commits all chunks up to the specified index */
     private void commit(int index) {
         if (index >= (numSegs - 1)) {
@@ -854,7 +828,7 @@ public class SinhalaInputMethod implements InputMethod {
         committedSeg = numSegs - 1;
         sendText(true);
         // once composed text is committed, reinitialize all variables
-        //rawText.setLength(0);
+        rawText.setLength(0);
         convertedText = null;
         converted = false;
 
