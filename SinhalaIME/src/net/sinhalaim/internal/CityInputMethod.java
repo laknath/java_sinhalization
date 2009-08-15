@@ -101,7 +101,7 @@ public class CityInputMethod implements InputMethod {
 	});
     }
     // input method window titles
-    static final String statusWindowTitle = "City Input Method";
+    static final String statusWindowTitle = "Sinhala Phonetic Input Method";
     static final String lookupWindowTitle = "Lookup Window";
 
     // lookup information - per instance

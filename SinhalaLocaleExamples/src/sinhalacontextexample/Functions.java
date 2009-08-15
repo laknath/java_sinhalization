@@ -158,8 +158,10 @@ public class Functions {
         this.view.jTextField3.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
         this.view.jTextField4.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
         this.view.jTextField7.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
-        this.view.jTextField15.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
         this.view.jTextField9.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
+        this.view.jTextField10.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
+        this.view.jTextField11.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
+        this.view.jTextField15.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
         this.view.jComboBox10.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
         this.view.jComboBox11.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
         this.view.jComboBox3.setFont(new java.awt.Font("KaputaUnicode", 0, 13));
@@ -174,8 +176,10 @@ public class Functions {
         this.view.jTextField3.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
         this.view.jTextField4.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
         this.view.jTextField7.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
-        this.view.jTextField15.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
         this.view.jTextField9.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
+        this.view.jTextField10.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
+        this.view.jTextField11.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
+        this.view.jTextField15.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
         this.view.jComboBox10.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
         this.view.jComboBox11.setFont(new java.awt.Font("DejaVu Sans", 1, 13));
         this.view.jComboBox3.setFont(new java.awt.Font("DejaVu Sans", 1, 13));

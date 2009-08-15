@@ -14,17 +14,35 @@ package ime;
  * Sri Lanka.
  * e-mail : zameer@bcs.org.uk
  */
+import java.awt.Graphics;
+import java.awt.print.*;
+import java.awt.print.PrinterJob;
 import javax.swing.*;
 import java.util.*;
 import java.awt.Font;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.text.DateFormat;
+import java.util.Date;
+import java.io.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.*;
+import javax.swing.*;
+import javax.swing.border.*;
+import javax.swing.event.*;
+import java.awt.geom.*;
+import java.sql.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.font.*;
 
-public class MainFrame extends javax.swing.JFrame {
+public class MainFrame extends javax.swing.JFrame{
 
     private UIManager.LookAndFeelInfo looks[];
     private Location loc;
-    
+    private JFileChooser fileChooser;
     private String text;
     private int nVowels=26;
     private String[] consonants= new String[46];
@@ -36,7 +54,7 @@ public class MainFrame extends javax.swing.JFrame {
     private String[] specialConsonantsUni= new String[6];
     private String[] specialCharUni= new String[3];
     private String[] specialChar= new String[3];
-
+    private final static int POINTS_PER_INCH = 72;
     
     /** Creates new form MainFrame */
     public MainFrame() {
@@ -152,7 +170,7 @@ public class MainFrame extends javax.swing.JFrame {
     
     
     private void translate(){
-        String s,r,v;
+        String s,v;
         text = jTextArea1.getText();  
         //special consonents
         for (int i=0; i<specialConsonants.length; i++){
@@ -218,55 +236,77 @@ public class MainFrame extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("IME - Faculty of Information Technology - Uni Moratuwa");
+        setTitle("IME - Zameer- Faculty of Information Technology - Uni Moratuwa");
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jTextArea1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Input Text", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 51, 51))); // NOI18N
+        jTextArea1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextArea1KeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTextArea1);
 
         jTextArea2.setColumns(20);
-        jTextArea2.setFont(new java.awt.Font("KandyUnicode", 0, 13)); // NOI18N
+        jTextArea2.setFont(new java.awt.Font("KandyUnicode", 0, 18));
         jTextArea2.setRows(5);
         jTextArea2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Output Text", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 0, 0))); // NOI18N
         jScrollPane2.setViewportView(jTextArea2);
 
-        jButton1.setText("Translate");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jMenu1.setText("File");
 
-        jMenuItem1.setText("Item");
+        jMenuItem1.setText("Load");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setText("Item");
+        jMenuItem6.setText("Print");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem6);
+
+        jMenuItem2.setText("Exit");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Edit");
 
-        jMenu3.setText("Menu");
-        jMenu2.add(jMenu3);
+        jMenuItem5.setText("Copy");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem5);
 
-        jMenu4.setText("Menu");
-        jMenu2.add(jMenu4);
+        jMenuItem4.setText("Paste");
+        jMenu2.add(jMenuItem4);
 
         jMenuBar1.add(jMenu2);
 
@@ -288,23 +328,23 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -316,9 +356,91 @@ JOptionPane.showMessageDialog(null,"This software is a property of,\n"+
          "\" Faculty of Information Technology\n University of Moratuwa\"");
 }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    System.exit(0);
+}//GEN-LAST:event_jMenuItem2ActionPerformed
+
+private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+
+   fileChooser=new JFileChooser();
+   fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+   
+   int x=fileChooser.showOpenDialog(this);
+   fileChooser.setVisible(true);
+   if(x!=fileChooser.CANCEL_OPTION){
+       // Option allows you to choose directories only
+       jLabel1.setText(fileChooser.getSelectedFile().getPath());
+       
+       try{
+       
+           Scanner input=new Scanner(new File(fileChooser.getSelectedFile().getPath()));
+           
+       while (input.hasNext())
+        {
+            jTextArea1.append(input.nextLine()+"\n");
+            //JOptionPane.showMessageDialog(this,"Hi");
+            
+        }
+       
+       translate();
+       }
+       catch(Exception e){
+        jLabel1.setText("File Couldn't be loaded");
+        
+       }
+          
+   }
+
+}//GEN-LAST:event_jMenuItem1ActionPerformed
+
+private void jTextArea1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea1KeyReleased
     translate();
-}//GEN-LAST:event_jButton1ActionPerformed
+}//GEN-LAST:event_jTextArea1KeyReleased
+
+private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    
+    /*Locale[] locales = Locale.getAvailableLocales();
+        for (Locale locale : locales) {
+            jTextArea1.append(" xx " + locale+"\n");
+        }*/
+    Date now = new Date();
+
+        // Display using the default locale format
+        DateFormat defaultFormat = DateFormat.getDateTimeInstance();
+        String defaultString = defaultFormat.format(now);
+        jTextArea1.append("Default   : " + defaultString+"\n");
+
+        // Display using the Antarctica locale format
+        DateFormat antarcticaFormat =
+                DateFormat.getDateTimeInstance(
+                DateFormat.FULL, DateFormat.FULL,
+                new Locale("si", "LK"));
+
+        String antarcticaString = antarcticaFormat.format(now);
+        jTextArea2.append("Antarctica: " + antarcticaString+"\n");
+
+}//GEN-LAST:event_jMenuItem5ActionPerformed
+
+private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+//--- Create a new PrinterJob object
+        PrinterJob printJob = PrinterJob.getPrinterJob();
+        
+        //--- Set the printable class to this one since we
+        //--- are implementing the Printable interface
+        //printJob.setPrintable(this);
+        
+        //--- Show a print dialog to the user. If the user
+        //--- clicks the print button, then print, otherwise
+        //--- cancel the print job
+        
+        if (printJob.printDialog()) {
+            try {
+                printJob.print();
+            } catch (Exception PrintException) {
+                PrintException.printStackTrace();
+            }
+        }
+}//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
     * @param args the command line arguments
@@ -328,16 +450,17 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;

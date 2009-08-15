@@ -67,9 +67,9 @@ public class CityInputMethodDescriptor implements InputMethodDescriptor {
             localeName = "Traditional Chinese";
         }
         if (localeName != null) {
-            return "City Input Method - " + localeName;
+            return "Sinhala Phonetic Input Method - " + localeName;
         } else {
-            return "City Input Method";
+            return "Sinhala Phonetic Input Method";
         }
     }
 

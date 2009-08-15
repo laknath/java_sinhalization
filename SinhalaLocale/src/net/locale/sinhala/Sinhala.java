@@ -115,7 +115,7 @@ class Sinhala implements LocaleInfo{
 
     private static final String NAN = "NaN"; 
 
-    private static final String CURRENCY_SYMBOL = "Rs";
+    private static final String CURRENCY_SYMBOL = "රු";
 
     private static final String PERCENT_FORMAT = "#,##0%";
 
@@ -123,7 +123,7 @@ class Sinhala implements LocaleInfo{
 
     private static final String INTEGER_FORMAT = "#,##0";
 
-    private static final String CURRENCY_FORMAT = "Rs #,##0.00";
+    private static final String CURRENCY_FORMAT = "රු #,##0.00";
 
     private static final String[][] COUNTRY_TUPLES = { { "LK", "ශ්‍රි ලංකාව" }};
 
