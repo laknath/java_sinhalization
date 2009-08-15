@@ -397,7 +397,12 @@ private void jTextArea1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:eve
 
 private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
 
-    this.jTextArea2.copy();
+    if (this.jTextArea1.isFocusOwner()){
+        this.jTextArea1.copy();
+    }else{
+        this.jTextArea2.copy();
+    }
+    
 }//GEN-LAST:event_jMenuItem5ActionPerformed
 
 private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
