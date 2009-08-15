@@ -23,14 +23,14 @@ import java.util.Locale;
 
 public class SinhalaInputMethodDescriptor implements InputMethodDescriptor {
 
-    public SinhalaInputMethodDescriptor() {
-    }
 
     /**
      * @see java.awt.im.spi.InputMethodDescriptor#getAvailableLocales
      */
     public Locale[] getAvailableLocales() {
-        Locale[] locales = {Locale.ENGLISH};
+        Locale[] locales = {
+                                Locale.ENGLISH,
+                            };
         return locales;
     }
 
@@ -38,7 +38,7 @@ public class SinhalaInputMethodDescriptor implements InputMethodDescriptor {
      * @see java.awt.im.spi.InputMethodDescriptor#hasDynamicLocaleList
      */
     public boolean hasDynamicLocaleList() {
-        return false;
+        return true;
     }
 
     /**
@@ -46,8 +46,11 @@ public class SinhalaInputMethodDescriptor implements InputMethodDescriptor {
      */
     public synchronized String getInputMethodDisplayName(Locale inputLocale, Locale displayLanguage) {
         String localeName = null;
+
         if (inputLocale == Locale.ENGLISH) {
             localeName = "English";
+        } else if (inputLocale == Locale.GERMAN) {
+            localeName = "German";
         }
         
         if (localeName != null) {

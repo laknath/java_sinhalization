@@ -17,8 +17,6 @@ package ime;
 import java.awt.print.*;
 import java.awt.print.PrinterJob;
 import java.util.*;
-import java.text.DateFormat;
-import java.util.Date;
 import java.io.*;
 import javax.swing.*;
 import java.awt.geom.*;
