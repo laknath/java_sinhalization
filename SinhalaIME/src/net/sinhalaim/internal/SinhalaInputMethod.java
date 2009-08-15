@@ -47,6 +47,7 @@ import java.security.PrivilegedAction;
 import java.text.MessageFormat;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.text.JTextComponent;
 
@@ -241,9 +242,8 @@ public class SinhalaInputMethod implements InputMethod {
     }
 
     //Translate the words
-    private void translate(JTextComponent jTextArea1){
+    private String translate(String text){
         String s,v;
-        text = jTextArea1.getText();
 
         //special consonents
         for (int i=0; i<specialConsonants.length; i++){
@@ -294,12 +294,192 @@ public class SinhalaInputMethod implements InputMethod {
             text = text.replace(vowels[i], vowelsUni[i]);
         }
 
-        jTextArea2.setText(text);
+        //jTextArea2.setText(text);
         //jTextArea2.setText("meyatuwana");
+        return text;
     }
-  
+
+    public void dispatchEvent(AWTEvent event) {
+        if (!active && (event instanceof KeyEvent)) {
+            System.out.println("SinhalaInputMethod.dispatch called with KeyEvent while not active");
+        }
+        if (disposed) {
+            System.out.println("SinhalaInputMethod.dispatch called after being disposed");
+        }
+        if (!(event instanceof InputEvent)) {
+            System.out.println("SinhalaInputMethod.dispatch called with event that's not an InputEvent");
+        }
+        if (event.getID() == KeyEvent.KEY_RELEASED) {
+             // if candidate window is active
+            if (lookupList != null) {
+                KeyEvent e = (KeyEvent) event;
+                if (e.isControlDown()) {
+                    if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                        // Control + Arrow Down commits chunks
+                        closeLookupWindow();
+                        commit(selectedSeg);
+                        e.consume();
+                    }
+                } else {
+                    // select candidate by Arrow Up/Down
+                    if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                        if (++lookupSelection == lookupCandidateCount) {
+                            lookupSelection = 0;
+                        }
+                        selectCandidate(lookupSelection);
+                        e.consume();
+                        } else if (e.getKeyCode() == KeyEvent.VK_UP) {
+                        if (--lookupSelection < 0) {
+                            lookupSelection = lookupCandidateCount;
+                        }
+                        selectCandidate(lookupSelection);
+                        e.consume();
+                    }
+                }
+
+            } else {
+                if (event.getID() == KeyEvent.KEY_RELEASED) {
+                    KeyEvent e = (KeyEvent) event;
+                    if (e.isControlDown()) {
+                        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                            // Control + Arrow Down commits chunks
+                            commit(selectedSeg);
+                            e.consume();
+                        }
+                    } else {
+                        // move selected segment by Arrow Right/Left
+                        if ((e.getKeyCode() == KeyEvent.VK_RIGHT) && (converted == true)) {
+                            if (selectedSeg < (numSegs - 1)) {
+                                selectedSeg++;
+                                sendText(false);
+                                e.consume();
+                            } else {
+                                Toolkit.getDefaultToolkit().beep();
+                            }
+                        } else if ((e.getKeyCode() == KeyEvent.VK_LEFT) && (converted == true)) {
+                            if (selectedSeg > (committedSeg + 1)) {
+                                selectedSeg--;
+                                sendText(false);
+                                e.consume();
+                            } else {
+                                Toolkit.getDefaultToolkit().beep();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (event.getID() == MouseEvent.MOUSE_CLICKED) {
+            MouseEvent e = (MouseEvent) event;
+            Component comp = e.getComponent();
+            Point pnt = comp.getLocationOnScreen();
+            int x = (int)pnt.getX() + e.getX();
+            int y = (int)pnt.getY() + e.getY();
+            TextHitInfo hit = inputMethodContext.getLocationOffset(x,y);
+            if (hit != null) {
+                // within composed text
+                if (converted) {
+                    selectedSeg = findSegment(hit.getInsertionIndex());
+                    sendText(false);
+                    e.consume();
+                } else {
+                    insertionPoint = hit.getInsertionIndex();
+                }
+            } else {
+                // if hit outside composition, simply commit all.
+                commitAll();
+            }
+        }
+
+        if (event.getID() == KeyEvent.KEY_TYPED) {
+            KeyEvent e = (KeyEvent) event;
+            if (handleCharacter(e.getKeyChar())) {
+                e.consume();
+            }
+        }
+    }
+
+    /**
+     * Attempts to handle a typed character.
+     * @return whether the character was handled
+     */
+    private boolean handleCharacter(char ch) {
+        if (lookupList != null) {
+            if (ch == ' ') {
+                if (++lookupSelection == lookupCandidateCount) {
+                    lookupSelection = 0;
+                }
+                selectCandidate(lookupSelection);
+                return true;
+            } else if (ch == '\n') {
+                commitAll();
+                closeLookupWindow();
+                return true;
+            } else if ('1' <= ch && ch <= '0' + lookupCandidateCount) {
+                selectCandidate(ch - '1');
+                closeLookupWindow();
+                return true;
+            } else {
+                Toolkit.getDefaultToolkit().beep();
+                return true;
+            }
+        } else if (converted) {
+            if (ch == ' ') {
+                convertAgain();
+                return true;
+            } else if (ch == '\n') {
+                commitAll();
+                return true;
+            } else {
+                Toolkit.getDefaultToolkit().beep();
+                return true;
+            }
+        } else {
+            if (ch == ' ') {
+                int length = rawText.length();
+                if (length == 3 || length == 6 || length == 9) {
+                    convertFirstTime();
+                    return true;
+                }
+            } else if (ch == '\n') {
+                if (rawText.length() != 0) {
+                    commitAll();
+                    return true;
+                }
+            } else if (ch == '\b') {
+                if (insertionPoint > 0) {
+                    rawText.deleteCharAt(insertionPoint - 1);
+                    --insertionPoint;
+                    sendText(false);
+                    return true;
+                }
+            } else if ('a' <= ch && ch <= 'z' || 'A' <= ch && ch <= 'Z') {
+                rawText.insert(insertionPoint++, ch);
+
+                System.out.println(rawText.toString() + rawText.length());
+                //String sinhalaText = this.translate( rawText.toString() );
+                //rawText.insert(0, sinhalaText);
+                commitAll();
+
+                sendText(false);
+                return true;
+            }
+            if (rawText.length() != 0) {
+                Toolkit.getDefaultToolkit().beep();
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void setInputMethodContext(InputMethodContext context) {
         inputMethodContext = context;
+
+        if (inputMethodContext instanceof JTextComponent){
+            JOptionPane.showMessageDialog(null, "testing");
+        }
+
         if (statusWindow == null) {
             Window sw;
 
@@ -465,107 +645,6 @@ public class SinhalaInputMethod implements InputMethod {
         throw new UnsupportedOperationException();
     }
 
-    public void dispatchEvent(AWTEvent event) {
-        if (!active && (event instanceof KeyEvent)) {
-            System.out.println("SinhalaInputMethod.dispatch called with KeyEvent while not active");
-        }
-        if (disposed) {
-            System.out.println("SinhalaInputMethod.dispatch called after being disposed");
-        }
-        if (!(event instanceof InputEvent)) {
-            System.out.println("SinhalaInputMethod.dispatch called with event that's not an InputEvent");
-        }
-        if (event.getID() == KeyEvent.KEY_RELEASED) {
-             // if candidate window is active
-            if (lookupList != null) {
-                KeyEvent e = (KeyEvent) event;
-                if (e.isControlDown()) {
-                    if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                        // Control + Arrow Down commits chunks
-                    closeLookupWindow();
-                    commit(selectedSeg);
-                    e.consume();
-                    }
-                } else {
-                    // select candidate by Arrow Up/Down
-                    if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    if (++lookupSelection == lookupCandidateCount) {
-                        lookupSelection = 0;
-                    }
-                    selectCandidate(lookupSelection);
-                    e.consume();
-                    } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    if (--lookupSelection < 0) {
-                        lookupSelection = lookupCandidateCount;
-                    }
-                    selectCandidate(lookupSelection);
-                    e.consume();
-                    }
-                }
-
-            } else {
-                if (event.getID() == KeyEvent.KEY_RELEASED) {
-                    KeyEvent e = (KeyEvent) event;
-                    if (e.isControlDown()) {
-                        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                            // Control + Arrow Down commits chunks
-                            commit(selectedSeg);
-                            e.consume();
-                        }
-                    } else {
-                        // move selected segment by Arrow Right/Left
-                        if ((e.getKeyCode() == KeyEvent.VK_RIGHT) && (converted == true)) {
-                            if (selectedSeg < (numSegs - 1)) {
-                            selectedSeg++;
-                            sendText(false);
-                            e.consume();
-                            } else {
-                            Toolkit.getDefaultToolkit().beep();
-                            }
-                        } else if ((e.getKeyCode() == KeyEvent.VK_LEFT) && (converted == true)) {
-                            if (selectedSeg > (committedSeg + 1)) {
-                            selectedSeg--;
-                            sendText(false);
-                            e.consume();
-                            } else {
-                            Toolkit.getDefaultToolkit().beep();
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        if (event.getID() == MouseEvent.MOUSE_CLICKED) {
-            MouseEvent e = (MouseEvent) event;
-            Component comp = e.getComponent();
-            Point pnt = comp.getLocationOnScreen();
-            int x = (int)pnt.getX() + e.getX();
-            int y = (int)pnt.getY() + e.getY();
-            TextHitInfo hit = inputMethodContext.getLocationOffset(x,y);
-            if (hit != null) {
-                // within composed text
-                if (converted) {
-                    selectedSeg = findSegment(hit.getInsertionIndex());
-                    sendText(false);
-                    e.consume();
-                } else {
-                    insertionPoint = hit.getInsertionIndex();
-                }
-            } else {
-                // if hit outside composition, simply commit all.
-                commitAll();
-            }
-        }
-
-        if (event.getID() == KeyEvent.KEY_TYPED) {
-            KeyEvent e = (KeyEvent) event;
-            if (handleCharacter(e.getKeyChar())) {
-                e.consume();
-            }
-        }
-    }
-
     /**
      * find segment at insertion point
      */
@@ -677,73 +756,6 @@ public class SinhalaInputMethod implements InputMethod {
     }
 
 
-    /**
-     * Attempts to handle a typed character.
-     * @return whether the character was handled
-     */
-    private boolean handleCharacter(char ch) {
-        if (lookupList != null) {
-            if (ch == ' ') {
-                if (++lookupSelection == lookupCandidateCount) {
-                    lookupSelection = 0;
-                }
-                selectCandidate(lookupSelection);
-                return true;
-            } else if (ch == '\n') {
-                commitAll();
-                closeLookupWindow();
-                return true;
-            } else if ('1' <= ch && ch <= '0' + lookupCandidateCount) {
-                selectCandidate(ch - '1');
-                closeLookupWindow();
-                return true;
-            } else {
-                Toolkit.getDefaultToolkit().beep();
-                return true;
-            }
-        } else if (converted) {
-            if (ch == ' ') {
-                convertAgain();
-                return true;
-            } else if (ch == '\n') {
-                commitAll();
-                return true;
-            } else {
-                Toolkit.getDefaultToolkit().beep();
-                return true;
-            }
-        } else {
-            if (ch == ' ') {
-                int length = rawText.length();
-                if (length == 3 || length == 6 || length == 9) {
-                    convertFirstTime();
-                    return true;
-                }
-            } else if (ch == '\n') {
-                if (rawText.length() != 0) {
-                    commitAll();
-                    return true;
-                }
-            } else if (ch == '\b') {
-                if (insertionPoint > 0) {
-                    rawText.deleteCharAt(insertionPoint - 1);
-                    --insertionPoint;
-                    sendText(false);
-                    return true;
-                }
-            } else if ('a' <= ch && ch <= 'z' || 'A' <= ch && ch <= 'Z') {
-            rawText.insert(insertionPoint++, ch);
-                sendText(false);
-                return true;
-            }
-            if (rawText.length() != 0) {
-                Toolkit.getDefaultToolkit().beep();
-                return true;
-            }
-        }
-        return false;
-    }
-
     /*
      * Looks up the entry for key in the given table, taken the
      * input method's locale into consideration.
@@ -840,11 +852,11 @@ public class SinhalaInputMethod implements InputMethod {
     /* commits all chunks */
     void commitAll() {
         committedSeg = numSegs - 1;
-            sendText(true);
+        sendText(true);
         // once composed text is committed, reinitialize all variables
-        rawText.setLength(0);
-            convertedText = null;
-            converted = false;
+        //rawText.setLength(0);
+        convertedText = null;
+        converted = false;
 
         rawTextSegs = null;
         convertedSegs = null;
@@ -905,32 +917,36 @@ public class SinhalaInputMethod implements InputMethod {
         if (converted) {
             formatOutput();
             if (committed) {
-            if (committedSeg == (numSegs - 1)) {
-                newTotalCommittedCharacterCount = convertedText.length();
-            } else {
-                newTotalCommittedCharacterCount = segPos[committedSeg + 1][0];
+                if (committedSeg == (numSegs - 1)) {
+                    newTotalCommittedCharacterCount = convertedText.length();
+                } else {
+                    newTotalCommittedCharacterCount = segPos[committedSeg + 1][0];
+                }
+                committedCharacterCount = newTotalCommittedCharacterCount - previouslyCommittedCharacterCount;
             }
-            committedCharacterCount = newTotalCommittedCharacterCount - previouslyCommittedCharacterCount;
-            }
-                as = new AttributedString(convertedText.substring(previouslyCommittedCharacterCount));
-                for(int i = committedSeg + 1; i < numSegs; i++) {
-                    InputMethodHighlight highlight;
-                    if (i == selectedSeg) {
-                        highlight = InputMethodHighlight.SELECTED_CONVERTED_TEXT_HIGHLIGHT;
-                    } else {
-                        highlight = InputMethodHighlight.UNSELECTED_CONVERTED_TEXT_HIGHLIGHT;
-                    }
-                    as.addAttribute(TextAttribute.INPUT_METHOD_HIGHLIGHT, highlight,
+
+            as = new AttributedString(convertedText.substring(previouslyCommittedCharacterCount));
+
+            for(int i = committedSeg + 1; i < numSegs; i++) {
+                InputMethodHighlight highlight;
+                if (i == selectedSeg) {
+                    highlight = InputMethodHighlight.SELECTED_CONVERTED_TEXT_HIGHLIGHT;
+                } else {
+                    highlight = InputMethodHighlight.UNSELECTED_CONVERTED_TEXT_HIGHLIGHT;
+                }
+
+                as.addAttribute(TextAttribute.INPUT_METHOD_HIGHLIGHT, highlight,
                                     segPos[i][0] - previouslyCommittedCharacterCount,
                                     segPos[i][1] - previouslyCommittedCharacterCount);
-                }
-                previouslyCommittedCharacterCount = newTotalCommittedCharacterCount;
+            }
+            previouslyCommittedCharacterCount = newTotalCommittedCharacterCount;
+            
         } else {
             as = new AttributedString(rawText.toString());
             if (committed) {
                 committedCharacterCount = rawText.length();
             } else if (rawText.length() != 0) {
-            as.addAttribute(TextAttribute.INPUT_METHOD_HIGHLIGHT,
+                as.addAttribute(TextAttribute.INPUT_METHOD_HIGHLIGHT,
                     InputMethodHighlight.SELECTED_RAW_TEXT_HIGHLIGHT);
                 caret = TextHitInfo.leading(insertionPoint);
             }
