@@ -14,31 +14,18 @@ package ime;
  * Sri Lanka.
  * e-mail : zameer@bcs.org.uk
  */
-import java.awt.Graphics;
 import java.awt.print.*;
 import java.awt.print.PrinterJob;
-import javax.swing.*;
 import java.util.*;
-import java.awt.Font;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 import java.text.DateFormat;
 import java.util.Date;
 import java.io.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.*;
 import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.event.*;
 import java.awt.geom.*;
-import java.sql.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.awt.font.*;
 
-public class MainFrame extends javax.swing.JFrame{
+
+public class MainFrame extends javax.swing.JFrame implements Printable {
 
     private UIManager.LookAndFeelInfo looks[];
     private Location loc;
@@ -367,7 +354,8 @@ private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
    
    int x=fileChooser.showOpenDialog(this);
    fileChooser.setVisible(true);
-   if(x!=fileChooser.CANCEL_OPTION){
+
+   if(x!=JFileChooser.CANCEL_OPTION){
        // Option allows you to choose directories only
        jLabel1.setText(fileChooser.getSelectedFile().getPath());
        
@@ -427,7 +415,7 @@ private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
         
         //--- Set the printable class to this one since we
         //--- are implementing the Printable interface
-        //printJob.setPrintable(this);
+        printJob.setPrintable(this); 
         
         //--- Show a print dialog to the user. If the user
         //--- clicks the print button, then print, otherwise
@@ -466,5 +454,43 @@ private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     // End of variables declaration//GEN-END:variables
+
+    public int print(Graphics g, PageFormat pageFormat, int pageIndex) throws PrinterException {
+       
+        
+        int i;
+        Graphics2D g2d;
+        Line2D.Double line = new Line2D.Double();
+        
+        //--- Validate the page number, we only print the first page
+        if (pageIndex == 0) {
+            
+            //--- Create a graphic2D object and set the default parameters
+            g2d = (Graphics2D) g;
+            g2d.setColor(Color.black);
+            //--- Translate the origin to be (0,0)
+            g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+            
+            //--- Draw a border around the page using a 12 point border
+            g2d.setStroke(new BasicStroke(2));
+            Rectangle2D.Double border = new Rectangle2D.Double(0, 0,pageFormat.getImageableWidth(),pageFormat.getImageableHeight());
+            g2d.draw(border);
+            
+            Font font = g2d.getFont();
+            //--- Print the horizontal lines
+            g2d.drawString("--------------------------------------------------------------------------------------------", POINTS_PER_INCH-20, POINTS_PER_INCH);
+            
+            g2d.setFont(new Font("KaputaUnicode", 0, 13));
+            g2d.drawString(jTextArea2.getText(), POINTS_PER_INCH + 20, POINTS_PER_INCH + 120);
+            
+            g2d.drawString("--------------------------------------------------------------------------------------------", POINTS_PER_INCH-20, POINTS_PER_INCH + 140);
+
+            return (PAGE_EXISTS);
+        } else
+            return (NO_SUCH_PAGE);
+        
+    
+    
+    }
 
 }
