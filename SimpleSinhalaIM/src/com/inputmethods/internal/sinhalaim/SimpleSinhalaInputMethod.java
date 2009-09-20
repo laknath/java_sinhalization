@@ -313,7 +313,7 @@ public class SimpleSinhalaInputMethod implements InputMethod {
     }
 
     /*
-     * with tributes to University of Colombo School of Computing
+     * With tributes to University of Colombo School of Computing
      * Language Technology Research Laboratory
      */
     private void initLanguageSettings(){
@@ -401,6 +401,7 @@ public class SimpleSinhalaInputMethod implements InputMethod {
         consonantsUni[42]="ෆ"; consonants[42]="f";
         consonantsUni[43]="ඣ"; consonants[43]="q";
         consonantsUni[44]="ග"; consonants[44]="g";
+
         //need to ommit in dealing with Rakaransha, thus coming at the end
         consonantsUni[45]="ර"; consonants[45]="r";
 
@@ -422,21 +423,19 @@ public class SimpleSinhalaInputMethod implements InputMethod {
             for (int j=0;j<consonants.length;j++){
                 s = consonants[j] + specialChar[i];
                 v = consonantsUni[j] + specialCharUni[i];
-                //r = new RegExp(s, "g");
                 text = text.replace(s, v);
             }
         }
+
         //consonants + Rakaransha + vowel modifiers
         for (int j=0;j<consonants.length;j++){
             for (int i=0;i<vowels.length;i++){
                 s = consonants[j] + "r" + vowels[i];
                 v = consonantsUni[j] + "්‍ර" + vowelModifiersUni[i];
-                //r = new RegExp(s, "g");
                 text = text.replace(s, v);
             }
             s = consonants[j] + "r";
             v = consonantsUni[j] + "්‍ර";
-            //r = new RegExp(s, "g");
             text = text.replace(s, v);
 
         }
@@ -446,20 +445,17 @@ public class SimpleSinhalaInputMethod implements InputMethod {
             for (int j=0;j<nVowels;j++){
                 s = consonants[i]+vowels[j];
                 v = consonantsUni[i] + vowelModifiersUni[j];
-                //r = new RegExp(s, "g");
                 text = text.replace(s, v);
             }
         }
 
         //consonents + HAL
         for (int i=0; i<consonants.length; i++){
-            //r = new RegExp(consonants[i], "g");
             text = text.replace(consonants[i], consonantsUni[i]+"්");
         }
 
         //vowels
         for (int i=0; i<vowels.length; i++){
-            //r = new RegExp(vowels[i], "g");
             text = text.replace(vowels[i], vowelsUni[i]);
         }
 
