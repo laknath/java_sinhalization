@@ -26,6 +26,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /*
  * SimpleSinhalaInputMethod is a phonetic English to Sinhala IM
@@ -146,6 +149,7 @@ public class SimpleSinhalaInputMethod implements InputMethod {
                         InputMethodHighlight.SELECTED_RAW_TEXT_HIGHLIGHT);
         as.addAttribute(TextAttribute.FONT,defaultSinhalaFont);
 
+        //update the lookup window
         updateSinhalaStatusCodes(buffer);
         
         context.dispatchInputMethodEvent(
@@ -331,8 +335,8 @@ public class SimpleSinhalaInputMethod implements InputMethod {
 
         this.context = context;
         String statusWindowTitle = "Sinhala-English Phonetic Lookup Window";
-	    JLabel label = new JLabel();
         list = new JList();
+        JLabel label;
         getSinhalaFont();
 
         try {
@@ -344,28 +348,53 @@ public class SimpleSinhalaInputMethod implements InputMethod {
 
         if (defaultSinhalaFont != null){
             Font temp = new Font(defaultSinhalaFont.getName(),Font.PLAIN,16);
-            label.setFont(temp);
             list.setFont(temp);
+            list.setSize(500, 40);
+            list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            list.addListSelectionListener(new ListSelectionListener() {
+
+                public void valueChanged(ListSelectionEvent e) {
+
+                    if (!e.getValueIsAdjusting() && list.getSelectedIndex() > 0){
+
+                        char[] chars = vowels[list.getSelectedIndex()].toCharArray();
+
+                        for (char i : chars){
+                            System.out.println(i);
+                            translateToSinhala(i);
+                        }
+
+                        list.removeAll();
+                        list.revalidate();
+                        sw.validate();
+                    }                  
+                }
+            });
+            
         }else{
+            label = new JLabel();
             label.setText("No Sinhala font was found in your system. Dynamic support will not be available.");
+            label.setSize(200, 50);
+            label.setOpaque(true);
+            label.setForeground(Color.black);
+            label.setBackground(Color.white);
+
+            if(sw instanceof JFrame){
+                ((JFrame)sw).getContentPane().add(label);
+            }else{
+                sw.add(label);
+            }
         }
 
-	    label.setOpaque(true);
-	    label.setForeground(Color.black);
-	    label.setBackground(Color.white);
 
-        if (sw instanceof JFrame) {
-			((JFrame)sw).getContentPane().add(label);
+        if (sw instanceof JFrame) {		
 			((JFrame)sw).getContentPane().add(new JScrollPane(list));
-        } else {
-			sw.add(label);
+        } else {			
 			sw.add(list);
         }
 
-        label.setSize(200, 50);
-        sw.setSize(300,100);
         updateWindowLocation(sw);
-        //sw.pack();
+        sw.pack();
         context.enableClientWindowNotification(this, true);
         
     }
@@ -563,8 +592,6 @@ public class SimpleSinhalaInputMethod implements InputMethod {
         String[] uniModifiers = new String[vowelModifiersUni.length];
         String[] modifers = new String[vowelModifiersUni.length];
 
-        System.out.println(text);
-
         for (int i=0; i < consonants.length; i++){
 
             if (text.endsWith(consonants[i])){
@@ -582,6 +609,9 @@ public class SimpleSinhalaInputMethod implements InputMethod {
             }
 
             updateStatusWindow(uniModifiers, modifers);
+        }else{
+            list.removeAll();
+            sw.validate();
         }
         
     }
@@ -591,10 +621,6 @@ public class SimpleSinhalaInputMethod implements InputMethod {
      */
     private void updateStatusWindow(String[] chars, String[] codes){
 
-        if (list == null){
-            list = new JList();
-            sw.add(new JScrollPane(list));
-        }
 
         String[] model = new String[chars.length];
 

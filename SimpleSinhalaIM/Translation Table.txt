@@ -1,0 +1,65 @@
+Translation Table For English-Sinhala Phonetic Java Input Method
+=================================================================
+
+
+Vowel Sounds       	| 	Auxiliaries
+====================================================================
+	
+අ - a			|   ර් - R
+ආ - aa			|  ෘ - ru
+ඇ - A			|  ෟ - au
+ඈ - ae			|  ෛ - I
+ඉ - i			|  ්‍ය - Y
+ඊ - ii			|  ඬ - nnda
+එ - e			|  ඳ - nndha
+ඒ - ea			|  ඟ - nnga
+ඔ - o			|
+ඕ - oe			|
+උ - u			|
+ඌ - uu			|
+ඖ - au		|
+	
+Consonants		| Deriving Consonants (Example ක)
+====================== 	| =======================================================
+ක - k			|  ක් - k
+බ - b			|  ක - ka
+ඛ - kh			|  කා - kaa
+ඹ - B			|  කැ - kA	
+ං - \n			|  කෑ - kAa
+ග - g			|  කි - ki
+ම - m			|  කී - kie
+ඝ - gh			|  කු - ku
+ශ - sh			|  කූ - kuu
+ඃ - \h			|  කෙ - ke
+ච - ch			|  කේ - kei
+ය - y			|  කො - ko
+ඡ - Ch			|  කෝ - koe
+ෂ - Sh			|  කෞ - kau
+ඬ - \N			|  ක්‍ර - kra
+ජ - j			|  ක්‍රා - kraa
+ර - r			|  ක්‍රැ - krA
+ඨ - T			|  ක්‍රෑ - krAa
+ෆ - f			|  ක්‍රි - kri
+ඍ - \R			|  ක්‍රී - krie
+ට - t			|  කෘ - kru
+ල - l			|  කෲ - kruu
+ඪ - D			|  ක්‍රෙ - kre
+ඥ - GN			|  ක්‍රේ - krei
+ඩ - d			|  ක්‍රො - kro
+ව - w			|  ක්‍රෝ - kroe
+ථ - Th			|
+ඤ - KN			|
+ත - th			|
+ස - s			|
+ධ - Dh			|
+ඣ - q			|
+ද - dh			|
+හ - h			|
+ඵ- P			|
+ළු - Lu			|
+න - n			|
+ණ - N			|
+භ - bh			|
+ළූ - Luu		|
+ප - p			|
+ළ - L			|						
