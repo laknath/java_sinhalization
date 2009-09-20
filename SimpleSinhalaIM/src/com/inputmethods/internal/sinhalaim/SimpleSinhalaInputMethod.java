@@ -2,7 +2,7 @@
  * SimpleSihalaInputMethod.java
  */
 
-package com.sun.inputmethods.internal.sinhalaim;
+package com.inputmethods.internal.sinhalaim;
 
 import java.awt.AWTEvent;
 import java.awt.Toolkit;

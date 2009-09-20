@@ -3,7 +3,7 @@
  * SimpleSihalaInputMethodDescriptor.java
  */
 
-package com.sun.inputmethods.internal.sinhalaim;
+package com.inputmethods.internal.sinhalaim;
 
 import java.awt.Image;
 import java.awt.im.spi.InputMethodDescriptor;
