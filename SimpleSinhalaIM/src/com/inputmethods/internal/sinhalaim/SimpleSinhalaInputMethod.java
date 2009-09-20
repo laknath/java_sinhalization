@@ -1,5 +1,5 @@
 /*
- * SimpleSihalaInputMethod.java
+ * SimpleSinhalaInputMethod.java
  */
 
 package com.inputmethods.internal.sinhalaim;
@@ -16,27 +16,19 @@ import java.awt.im.spi.InputMethod;
 import java.awt.im.spi.InputMethodContext;
 import java.text.AttributedString;
 import java.util.Locale;
-import java.util.Vector;
 
 /*
- * SimpleSihalaInputMethod is a phonetic English to Sinhala IM
+ * SimpleSinhalaInputMethod is a phonetic English to Sinhala IM
  * that allows to enter Sinhala fonts easiy in English
  */
 public class SimpleSinhalaInputMethod implements InputMethod {
-
-    private static final int UNSET           = 0;
-    private static final int ESCAPE          = 1; 
-    private static final int SPECIAL_ESCAPE  = 2; 
-    private static final int SURROGATE_PAIR  = 3; 
 
     private InputMethodContext context;
     private Locale locale;
     private StringBuffer buffer;
     private int insertionPoint;
-    private int format = UNSET;
 
     //sinhala vovel settings
-    private Vector<String> stack = new Vector<String>();
     private int nVowels=26;
     private String[] consonants= new String[46];
     private String[] consonantsUni= new String[46];
@@ -88,6 +80,8 @@ public class SimpleSinhalaInputMethod implements InputMethod {
             } else {
                 switch (c) { 
                     case ' ':
+                    case '\n':	// Return
+                    case '\t':	// Tab
                         finishComposition();
                         break;
                     case '\u007f':	// Delete
@@ -98,10 +92,6 @@ public class SimpleSinhalaInputMethod implements InputMethod {
                         break;
                     case '\u001b':	// Escape
                         cancelComposition();
-                        break;
-                    case '\n':	// Return
-                    case '\t':	// Tab
-                        sendCommittedText(buffer);
                         break;
                     default:
                         translateToSinhala(c);
@@ -120,9 +110,11 @@ public class SimpleSinhalaInputMethod implements InputMethod {
 
     private void translateToSinhala(char c) {
 
-        addCharacter(c);
-        StringBuffer sinhalaBuf = new StringBuffer(translate(buffer.toString()));
-        sendComposedText(sinhalaBuf);
+        if (!(c == '\n' || c == '\t' ||  c == '\u007f' ||  c == '\b' ||  c == '\u001b')){
+            addCharacter(c);
+            sendComposedText(getSinhalaBuffer());
+        }
+
 
     }
 
@@ -157,7 +149,13 @@ public class SimpleSinhalaInputMethod implements InputMethod {
 
         buffer.setLength(0);
         insertionPoint = 0;
-        format = UNSET;
+    }
+
+    /* 
+     * returns a new Sinhala text buffer from English text
+     */
+    private StringBuffer getSinhalaBuffer(){
+        return new StringBuffer(translate(buffer.toString()));
     }
 
     /**
@@ -165,12 +163,9 @@ public class SimpleSinhalaInputMethod implements InputMethod {
      * 
      */
     private void moveCaretLeft() {
-        int len = buffer.length();
+
         if (--insertionPoint < 2) {
             insertionPoint++;
-            beep();
-        } else if (format == SURROGATE_PAIR && insertionPoint == 7) {
-            insertionPoint = 8;
             beep();
         }
 
@@ -203,9 +198,9 @@ public class SimpleSinhalaInputMethod implements InputMethod {
 
         buffer.deleteCharAt(--insertionPoint);
         if (buffer.length() == 0) {
-            sendCommittedText(buffer);
+            sendCommittedText(getSinhalaBuffer());
         } else {
-            sendComposedText(buffer);
+            sendComposedText(getSinhalaBuffer());
         }
 
     }
@@ -217,7 +212,7 @@ public class SimpleSinhalaInputMethod implements InputMethod {
     private void deleteCharacter() {
         if (insertionPoint < buffer.length()) {
             buffer.deleteCharAt(insertionPoint);
-            sendComposedText(buffer);
+            sendComposedText(getSinhalaBuffer());
         } else {
             beep();
         }
@@ -227,21 +222,18 @@ public class SimpleSinhalaInputMethod implements InputMethod {
     private void startComposition(char c) {
         buffer.append(c);
         insertionPoint = 1;
-        sendComposedText(buffer);
+        sendComposedText(getSinhalaBuffer());
     }
 
     private void cancelComposition() {
         buffer.setLength(0);
         insertionPoint = 0;
-        sendCommittedText(buffer);
+        sendCommittedText(getSinhalaBuffer());
     }
 
     private void finishComposition() {
-        int len = buffer.length();
 
-        StringBuffer sinhalaBuf = new StringBuffer(translate(buffer.toString()));
-
-        sendCommittedText(sinhalaBuf);
+        sendCommittedText(getSinhalaBuffer());
         buffer.setLength(0);
 
         beep();
@@ -255,8 +247,6 @@ public class SimpleSinhalaInputMethod implements InputMethod {
 
 
     public void activate() {
-
-        System.out.println("testing");
 
         if (buffer == null) {
             buffer = new StringBuffer();

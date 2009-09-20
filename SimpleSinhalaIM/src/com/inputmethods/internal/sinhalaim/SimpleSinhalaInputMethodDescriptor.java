@@ -1,6 +1,6 @@
 
 /*
- * SimpleSihalaInputMethodDescriptor.java
+ * SimpleSinhalaInputMethodDescriptor.java
  */
 
 package com.inputmethods.internal.sinhalaim;
@@ -11,7 +11,7 @@ import java.awt.im.spi.InputMethod;
 import java.util.Locale;
 
 /*
- * SimpleSihalaInputMethodDescriptor is the discriptor used by the InputMethod SPF
+ * SimpleSinhalaInputMethodDescriptor is the discriptor used by the InputMethod SPF
  */
 public class SimpleSinhalaInputMethodDescriptor implements InputMethodDescriptor {
 
