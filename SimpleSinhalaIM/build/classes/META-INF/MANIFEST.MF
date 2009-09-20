@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
-Created-By: 1.6.0_02 (Sun Microsystems Inc.)
-Main-Class: CodePointIM
+Created-By: TechEd - FIT
+Main-Class: SimpleSihalaIM
 

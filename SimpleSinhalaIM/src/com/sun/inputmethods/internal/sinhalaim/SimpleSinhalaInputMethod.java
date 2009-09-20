@@ -256,22 +256,7 @@ public class SimpleSinhalaInputMethod implements InputMethod {
 
     public void activate() {
 
-        /*
-        // Font info is obtained from the current graphics environment.
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-
-        //--- Get an array of font names (smaller than the number of fonts)
-        String[] fontNames = ge.getAvailableFontFamilyNames();
-
-        //--- Get an array of fonts.  It's preferable to use the names above.
-        Font[] allFonts = ge.getAllFonts();
-
-        int j = 0;
-        for (Font i: allFonts){
-            System.out.println(j + " " +i.getFontName());
-            j++;
-        }*/
-
+        System.out.println("testing");
 
         if (buffer == null) {
             buffer = new StringBuffer();
