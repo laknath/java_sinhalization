@@ -355,7 +355,7 @@ public class SimpleSinhalaInputMethod implements InputMethod {
 
                 public void valueChanged(ListSelectionEvent e) {
 
-                    if (!e.getValueIsAdjusting() && list.getSelectedIndex() > 0){
+                    if (!e.getValueIsAdjusting() && list.getSelectedIndex() > -1){
 
                         char[] chars = vowels[list.getSelectedIndex()].toCharArray();
 
@@ -611,6 +611,7 @@ public class SimpleSinhalaInputMethod implements InputMethod {
             updateStatusWindow(uniModifiers, modifers);
         }else{
             list.removeAll();
+            list.setListData(new Object[]{});
             sw.validate();
         }
         
