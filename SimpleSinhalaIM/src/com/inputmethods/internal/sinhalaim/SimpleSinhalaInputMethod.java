@@ -312,6 +312,10 @@ public class SimpleSinhalaInputMethod implements InputMethod {
         return true;
     }
 
+    /*
+     * with tributes to University of Colombo School of Computing
+     * Language Technology Research Laboratory
+     */
     private void initLanguageSettings(){
 
         vowelsUni[0]="ඌ";    vowels[0]="oo";    vowelModifiersUni[0]="ූ";
