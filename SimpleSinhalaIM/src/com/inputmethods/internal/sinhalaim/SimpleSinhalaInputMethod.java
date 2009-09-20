@@ -5,8 +5,14 @@
 package com.inputmethods.internal.sinhalaim;
 
 import java.awt.AWTEvent;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.Rectangle;
+import java.awt.Window;
 import java.awt.event.InputMethodEvent;
 import java.awt.event.KeyEvent;
 import java.awt.font.TextAttribute;
@@ -16,6 +22,10 @@ import java.awt.im.spi.InputMethod;
 import java.awt.im.spi.InputMethodContext;
 import java.text.AttributedString;
 import java.util.Locale;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
 
 /*
  * SimpleSinhalaInputMethod is a phonetic English to Sinhala IM
@@ -39,6 +49,10 @@ public class SimpleSinhalaInputMethod implements InputMethod {
     private String[] specialConsonantsUni= new String[6];
     private String[] specialCharUni= new String[3];
     private String[] specialChar= new String[3];
+
+    private static Window sw;
+    private Font defaultSinhalaFont = null;
+    private JList list = null;
 
     /**
      * This is the input method's main routine.  The composed text is stored
@@ -110,7 +124,7 @@ public class SimpleSinhalaInputMethod implements InputMethod {
 
     private void translateToSinhala(char c) {
 
-        if (!(c == '\n' || c == '\t' ||  c == '\u007f' ||  c == '\b' ||  c == '\u001b')){
+        if (Character.isLetterOrDigit(c)){
             addCharacter(c);
             sendComposedText(getSinhalaBuffer());
         }
@@ -130,6 +144,9 @@ public class SimpleSinhalaInputMethod implements InputMethod {
         AttributedString as = new AttributedString(tempBuf.toString());
         as.addAttribute(TextAttribute.INPUT_METHOD_HIGHLIGHT,
                         InputMethodHighlight.SELECTED_RAW_TEXT_HIGHLIGHT);
+        as.addAttribute(TextAttribute.FONT,defaultSinhalaFont);
+
+        updateSinhalaStatusCodes(buffer);
         
         context.dispatchInputMethodEvent(
                                   InputMethodEvent.INPUT_METHOD_TEXT_CHANGED,
@@ -142,6 +159,7 @@ public class SimpleSinhalaInputMethod implements InputMethod {
      */
     private void sendCommittedText(StringBuffer tempBuf) {
         AttributedString as = new AttributedString(tempBuf.toString());
+
         context.dispatchInputMethodEvent(
                                   InputMethodEvent.INPUT_METHOD_TEXT_CHANGED,
                                   as.getIterator(), tempBuf.length(),
@@ -252,6 +270,13 @@ public class SimpleSinhalaInputMethod implements InputMethod {
             buffer = new StringBuffer();
             initLanguageSettings();
             insertionPoint = 0;
+            getSinhalaFont();
+        }
+
+        synchronized (sw) {
+            if (!sw.isVisible()) {
+                sw.setVisible(true);
+            }
         }
 
     }
@@ -301,10 +326,60 @@ public class SimpleSinhalaInputMethod implements InputMethod {
         throw new UnsupportedOperationException();
     }
 
+
     public void setInputMethodContext(InputMethodContext context) {
 
         this.context = context;
+        String statusWindowTitle = "Sinhala-English Phonetic Lookup Window";
+	    JLabel label = new JLabel();
+        list = new JList();
+        getSinhalaFont();
+
+        try {
+            //for java with Swing
+            sw = context.createInputMethodJFrame(statusWindowTitle, false);
+        } catch (Exception e) {
+            sw = context.createInputMethodWindow(statusWindowTitle, false);
+        }
+
+        if (defaultSinhalaFont != null){
+            Font temp = new Font(defaultSinhalaFont.getName(),Font.PLAIN,16);
+            label.setFont(temp);
+            list.setFont(temp);
+        }else{
+            label.setText("No Sinhala font was found in your system. Dynamic support will not be available.");
+        }
+
+	    label.setOpaque(true);
+	    label.setForeground(Color.black);
+	    label.setBackground(Color.white);
+
+        if (sw instanceof JFrame) {
+			((JFrame)sw).getContentPane().add(label);
+			((JFrame)sw).getContentPane().add(new JScrollPane(list));
+        } else {
+			sw.add(label);
+			sw.add(list);
+        }
+
+        label.setSize(200, 50);
+        sw.setSize(300,100);
+        updateWindowLocation(sw);
+        //sw.pack();
+        context.enableClientWindowNotification(this, true);
         
+    }
+
+    private void updateWindowLocation(Window sw) {
+        Point windowLocation = new Point();
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Dimension windowSize = sw.getSize();
+
+        windowLocation.x = (int)((screenSize.getWidth() - windowSize.getWidth())/2 +  windowSize.getWidth());
+        windowLocation.y = (int)((screenSize.getHeight() - windowSize.getHeight())/2 +  windowSize.getHeight());
+
+        sw.setLocation(windowLocation);
     }
 
     public boolean setLocale(Locale locale) {
@@ -314,29 +389,29 @@ public class SimpleSinhalaInputMethod implements InputMethod {
 
     /*
      * With tributes to University of Colombo School of Computing
-     * Language Technology Research Laboratory
+     * Language Technology Research Laboratory for the concept
      */
     private void initLanguageSettings(){
 
         vowelsUni[0]="ඌ";    vowels[0]="oo";    vowelModifiersUni[0]="ූ";
-        vowelsUni[1]="ඕ";    vowels[1]="o\\)";    vowelModifiersUni[1]="ෝ";
+        vowelsUni[1]="ඕ";    vowels[1]="oe";    vowelModifiersUni[1]="ෝ";
         vowelsUni[2]="ඕ";    vowels[2]="oe";    vowelModifiersUni[2]="ෝ";
         vowelsUni[3]="ආ";    vowels[3]="aa";    vowelModifiersUni[3]="ා";
-        vowelsUni[4]="ආ";    vowels[4]="a\\)";    vowelModifiersUni[4]="ා";
+        vowelsUni[4]="ආ";    vowels[4]="aa";    vowelModifiersUni[4]="ා";
         vowelsUni[5]="ඈ";    vowels[5]="Aa";    vowelModifiersUni[5]="ෑ";
-        vowelsUni[6]="ඈ";    vowels[6]="A\\)";    vowelModifiersUni[6]="ෑ";
+        vowelsUni[6]="ඈ";    vowels[6]="Aa";    vowelModifiersUni[6]="ෑ";
         vowelsUni[7]="ඈ";    vowels[7]="ae";    vowelModifiersUni[7]="ෑ";
         vowelsUni[8]="ඊ";    vowels[8]="ii";    vowelModifiersUni[8]="ී";
-        vowelsUni[9]="ඊ";    vowels[9]="i\\)";    vowelModifiersUni[9]="ී";
+        vowelsUni[9]="ඊ";    vowels[9]="ii";    vowelModifiersUni[9]="ී";
         vowelsUni[10]="ඊ";    vowels[10]="ie";    vowelModifiersUni[10]="ී";
         vowelsUni[11]="ඊ";    vowels[11]="ee";    vowelModifiersUni[11]="ී";
         vowelsUni[12]="ඒ";    vowels[12]="ea";    vowelModifiersUni[12]="ේ";
-        vowelsUni[13]="ඒ";    vowels[13]="e\\)";    vowelModifiersUni[13]="ේ";
+        vowelsUni[13]="ඒ";    vowels[13]="ea";    vowelModifiersUni[13]="ේ";
         vowelsUni[14]="ඒ";    vowels[14]="ei";    vowelModifiersUni[14]="ේ";
         vowelsUni[15]="ඌ";    vowels[15]="uu";    vowelModifiersUni[15]="ූ";
-        vowelsUni[16]="ඌ";    vowels[16]="u\\)";    vowelModifiersUni[16]="ූ";
+        vowelsUni[16]="ඌ";    vowels[16]="uu";    vowelModifiersUni[16]="ූ";
         vowelsUni[17]="ඖ";    vowels[17]="au";    vowelModifiersUni[17]="ෞ";
-        vowelsUni[18]="ඇ";    vowels[18]="/\\a";    vowelModifiersUni[18]="ැ";
+        vowelsUni[18]="ඇ";    vowels[18]="A";    vowelModifiersUni[18]="ැ";
 
         vowelsUni[19]="අ";    vowels[19]="a";    vowelModifiersUni[19]="";
         vowelsUni[20]="ඇ";    vowels[20]="A";    vowelModifiersUni[20]="ැ";
@@ -460,6 +535,77 @@ public class SimpleSinhalaInputMethod implements InputMethod {
         }
 
         return text;
+    }
+
+    //loads a Sinhala font from the system
+    private void getSinhalaFont(){
+
+        Font[] fonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
+
+        for (Font f : fonts){
+            
+            if ( f.canDisplay(Character.codePointAt(new char[]{'\u0DF4'}, 0)  ) ){
+                defaultSinhalaFont = f;
+                break;
+            }
+
+        }
+
+    }
+
+    /* 
+     * update Sinhala Codes in status window
+     */
+    private void updateSinhalaStatusCodes(StringBuffer sb){
+        
+        String text = sb.toString();
+        String base = "", baseUni = "";
+        String[] uniModifiers = new String[vowelModifiersUni.length];
+        String[] modifers = new String[vowelModifiersUni.length];
+
+        System.out.println(text);
+
+        for (int i=0; i < consonants.length; i++){
+
+            if (text.endsWith(consonants[i])){
+                base = consonants[i];
+                baseUni = consonantsUni[i];
+                break;
+            }
+
+        }        
+
+        if (!base.equals("")){
+            for (int i=0; i < vowelModifiersUni.length; i++){
+                modifers[i] = base + vowels[i];
+                uniModifiers[i] = baseUni + vowelModifiersUni[i];
+            }
+
+            updateStatusWindow(uniModifiers, modifers);
+        }
+        
+    }
+
+    /*
+     * Update the status window
+     */
+    private void updateStatusWindow(String[] chars, String[] codes){
+
+        if (list == null){
+            list = new JList();
+            sw.add(new JScrollPane(list));
+        }
+
+        String[] model = new String[chars.length];
+
+        for (int i = 0; i < model.length; i++){
+            model[i] = chars[i]  + "-" + codes[i];
+        }
+
+        
+        list.removeAll();
+        list.setListData(model);
+        sw.validate();
     }
 
 }
