@@ -62,7 +62,6 @@ public class SinhalaInputMethod implements InputMethod {
     };
 
     // lookup tables - shared by all instances of this input method
-    private static Properties cityNames;
     private static Properties cityAliases;
     private static Properties templates;
 
@@ -119,7 +118,6 @@ public class SinhalaInputMethod implements InputMethod {
     private boolean isSingleSegment = true;
 
     private int insertionPoint;
-    private String[] rawTextSegs = null;
     private String[] convertedSegs = null;
     private String fmt = null;
     private int fieldPos[][] = null;
@@ -133,6 +131,7 @@ public class SinhalaInputMethod implements InputMethod {
     //sinhala vovel settings
     private String text;
     private int nVowels=26;
+    private Vector<String> stack = new Vector<String>();
     private String[] consonants= new String[46];
     private String[] consonantsUni= new String[46];
     private String[] vowels= new String[26];
@@ -809,7 +808,6 @@ public class SinhalaInputMethod implements InputMethod {
         convertedText = null;
         converted = false;
 
-        rawTextSegs = null;
         convertedSegs = null;
         fmt = null;
         fieldPos = null;
