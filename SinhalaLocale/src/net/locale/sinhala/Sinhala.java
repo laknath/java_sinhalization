@@ -54,16 +54,16 @@ class Sinhala implements LocaleInfo{
                                                   };
 
     private static final String[] WEEKDAYS = { "",
-                                               "\u0d89\u0dbb\u0dd2\u0daf\u0dcf",
-                                               "\u0dc3\u0daf\u0dd4\u0daf",
-                                               "\u0d85\u0d9c\u0dc4\u0dbb\u0dd4\u0dc0\u0daf\u0dcf", 
-                                               "\u0db6\u0daf\u0dcf\u0daf\u0dcf", 
-                                               "\u0db6\u0dca\u200d\u0dbb\u0dc4\u0dc3\u0dca\u0db4\u0dad\u0dd2\u0db1\u0dca\u0daf\u0dcf",
-                                               "\u0dc3\u0dd2\u0d9a\u0dd4\u0dbb\u0dcf\u0daf\u0dcf", 
-                                               "\u0dc3\u0dd9\u0db1\u0dc3\u0dd4\u0dbb\u0dcf\u0daf\u0dcf",
+                                         	"ඉරිදා",
+                                           	"සඳුදා",
+                                           	"අඟහරුවාදා", 
+                                           	"බදාදා", 
+                                           	"බ්‍රහස්පතින්දා",
+                                           	"සිකුරාදා", 
+                                        	"සෙනසුරාදා"
                                             };
             
-    private static final String[] SHORT_WEEKDAYS = {"", 
+    private static final String[] SHORT_WEEKDAYS = {	 "", 
                                                     "ඉ",
                                                     "ස",
                                                     "අ",
